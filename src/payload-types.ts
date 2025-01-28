@@ -13,6 +13,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    author: Author;
+    book: Book;
+    series: Series;
+    tag: Tag;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -21,6 +25,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    author: AuthorSelect<false> | AuthorSelect<true>;
+    book: BookSelect<false> | BookSelect<true>;
+    series: SeriesSelect<false> | SeriesSelect<true>;
+    tag: TagSelect<false> | TagSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -95,6 +103,109 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "author".
+ */
+export interface Author {
+  id: string;
+  name: string;
+  books?:
+    | ({
+        relationTo: 'book';
+        value: string | Book;
+      } | null)
+    | ({
+        relationTo: 'series';
+        value: string | Series;
+      } | null);
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "book".
+ */
+export interface Book {
+  id: string;
+  title: string;
+  image?: (string | null) | Media;
+  author?: (string | null) | Author;
+  series?: (string | null) | Series;
+  bookNumber?: number | null;
+  published?: string | null;
+  length?: number | null;
+  rating?: number | null;
+  spiciness?: number | null;
+  finished?: boolean | null;
+  show?: boolean | null;
+  tags?: (string | null) | Tag;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  notes?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  smell?: string | null;
+  purchaseDate?: string | null;
+  finishDate?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "series".
+ */
+export interface Series {
+  id: string;
+  title: string;
+  books?:
+    | ({
+        relationTo: 'book';
+        value: string | Book;
+      } | null)
+    | ({
+        relationTo: 'author';
+        value: string | Author;
+      } | null);
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tag".
+ */
+export interface Tag {
+  id: string;
+  title: string;
+  books?: (string | null) | Book;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -107,6 +218,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'author';
+        value: string | Author;
+      } | null)
+    | ({
+        relationTo: 'book';
+        value: string | Book;
+      } | null)
+    | ({
+        relationTo: 'series';
+        value: string | Series;
+      } | null)
+    | ({
+        relationTo: 'tag';
+        value: string | Tag;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -182,6 +309,61 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "author_select".
+ */
+export interface AuthorSelect<T extends boolean = true> {
+  name?: T;
+  books?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "book_select".
+ */
+export interface BookSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  author?: T;
+  series?: T;
+  bookNumber?: T;
+  published?: T;
+  length?: T;
+  rating?: T;
+  spiciness?: T;
+  finished?: T;
+  show?: T;
+  tags?: T;
+  description?: T;
+  notes?: T;
+  smell?: T;
+  purchaseDate?: T;
+  finishDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "series_select".
+ */
+export interface SeriesSelect<T extends boolean = true> {
+  title?: T;
+  books?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tag_select".
+ */
+export interface TagSelect<T extends boolean = true> {
+  title?: T;
+  books?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

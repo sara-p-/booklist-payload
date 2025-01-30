@@ -1,0 +1,21 @@
+.header {
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: var(--secondary);
+  border-bottom: 7px solid var(--primary);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+}
+
+.h1 {
+  margin-bottom: 0;
+}

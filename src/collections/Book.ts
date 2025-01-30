@@ -5,6 +5,10 @@ export const Book: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'author', 'series', 'bookNumber', 'finishDate'],
+  },
   fields: [
     {
       name: 'title',
@@ -91,6 +95,7 @@ export const Book: CollectionConfig = {
       name: 'tags',
       type: 'relationship',
       relationTo: 'tag',
+      hasMany: true,
       admin: {
         position: 'sidebar',
       },

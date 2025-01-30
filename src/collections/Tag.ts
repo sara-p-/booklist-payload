@@ -5,6 +5,10 @@ export const Tag: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title'],
+  },
   fields: [
     {
       name: 'title',
@@ -15,6 +19,7 @@ export const Tag: CollectionConfig = {
       name: 'books',
       type: 'relationship',
       relationTo: 'book',
+      hasMany: true,
     },
   ],
 }

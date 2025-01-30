@@ -12,6 +12,9 @@ export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
+  const books = await payload.find({ collection: 'book' })
+
+  console.log(books)
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 

@@ -5,6 +5,10 @@ export const Series: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title'],
+  },
   fields: [
     {
       name: 'title',
@@ -15,6 +19,7 @@ export const Series: CollectionConfig = {
       name: 'books',
       type: 'relationship',
       relationTo: ['book', 'author'],
+      hasMany: true,
     },
   ],
 }

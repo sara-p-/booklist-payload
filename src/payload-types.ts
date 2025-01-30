@@ -109,14 +109,17 @@ export interface Author {
   id: string;
   name: string;
   books?:
-    | ({
-        relationTo: 'book';
-        value: string | Book;
-      } | null)
-    | ({
-        relationTo: 'series';
-        value: string | Series;
-      } | null);
+    | (
+        | {
+            relationTo: 'book';
+            value: string | Book;
+          }
+        | {
+            relationTo: 'series';
+            value: string | Series;
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -137,7 +140,7 @@ export interface Book {
   spiciness?: number | null;
   finished?: boolean | null;
   show?: boolean | null;
-  tags?: (string | null) | Tag;
+  tags?: (string | Tag)[] | null;
   description?: {
     root: {
       type: string;
@@ -182,14 +185,17 @@ export interface Series {
   id: string;
   title: string;
   books?:
-    | ({
-        relationTo: 'book';
-        value: string | Book;
-      } | null)
-    | ({
-        relationTo: 'author';
-        value: string | Author;
-      } | null);
+    | (
+        | {
+            relationTo: 'book';
+            value: string | Book;
+          }
+        | {
+            relationTo: 'author';
+            value: string | Author;
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -200,7 +206,7 @@ export interface Series {
 export interface Tag {
   id: string;
   title: string;
-  books?: (string | null) | Book;
+  books?: (string | Book)[] | null;
   updatedAt: string;
   createdAt: string;
 }

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
-
+import Sidebar from '@/components/Sidebar/Sidebar'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
@@ -20,7 +20,8 @@ export default async function HomePage() {
 
   return (
     <div className="home">
-      <div className="content">
+      <Sidebar />
+      {/* <div className="content">
         <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
           <Image
@@ -56,7 +57,7 @@ export default async function HomePage() {
         <a className="codeLink" href={fileURL}>
           <code>app/(frontend)/page.tsx</code>
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }

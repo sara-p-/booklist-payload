@@ -1,0 +1,38 @@
+.trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 14px;
+  height: 50px;
+
+  border: var(--border-thin);
+  border-top: var(--border-thick);
+  font-size: 1rem;
+  font-weight: 400;
+  position: relative;
+}
+
+.content {
+  width: 100%;
+  background-color: var(--secondary);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  border: var(--border-thin);
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 100;
+}
+
+.item {
+  width: 100%;
+  padding: 0 14px;
+  border-bottom: var(--border-thin);
+  /* font-size: 1rem; */
+  font-weight: 400;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}

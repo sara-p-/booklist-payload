@@ -20,19 +20,21 @@
   margin: 0;
   overflow: hidden;
   border: var(--border-thin);
-  position: absolute;
-  top: 50px;
-  left: 0;
-  z-index: 100;
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
 }
 
 .item {
   width: 100%;
-  padding: 0 14px;
+  padding: 8px 16px;
   border-bottom: var(--border-thin);
-  /* font-size: 1rem; */
   font-weight: 400;
-  height: 50px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: var(--primary);
+    color: var(--secondary);
+  }
 }

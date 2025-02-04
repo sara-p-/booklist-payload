@@ -30,8 +30,7 @@ export default function SelectField({ options, label, onChange }: SelectFieldPro
       </Select.Trigger>
 
       <Select.Portal>
-        <Select.Content className={styles.content}>
-          <Select.ScrollUpButton />
+        <Select.Content className={styles.content} position="popper" align="start" sideOffset={0}>
           <Select.Viewport>
             {options.map((option, index) => (
               <Select.Item key={index} value={option.value} className={styles.item}>
@@ -40,8 +39,6 @@ export default function SelectField({ options, label, onChange }: SelectFieldPro
               </Select.Item>
             ))}
           </Select.Viewport>
-          <Select.ScrollDownButton />
-          <Select.Arrow />
         </Select.Content>
       </Select.Portal>
     </Select.Root>

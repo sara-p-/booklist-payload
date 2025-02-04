@@ -1,0 +1,16 @@
+.checkbox {
+  appearance: none;
+  border: var(--border-thin);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 6px 9px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  &:checked {
+    background-color: var(--primary);
+    color: var(--secondary);
+  }
+}

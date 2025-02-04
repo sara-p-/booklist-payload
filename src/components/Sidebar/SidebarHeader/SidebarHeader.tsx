@@ -10,10 +10,10 @@ export default function SidebarHeader() {
         <h2 className={styles.title}>51 books</h2>
         <div className={styles.actions}>
           <button>
-            <FontAwesomeIcon icon={faList} style={{ width: '24px' }} />
+            <FontAwesomeIcon icon={faList} style={{ width: '24px', height: 'auto' }} />
           </button>
           <button>
-            <FontAwesomeIcon icon={faSortAlphaDown} style={{ width: '24px' }} />
+            <FontAwesomeIcon icon={faSortAlphaDown} style={{ width: '24px', height: 'auto' }} />
           </button>
         </div>
       </div>

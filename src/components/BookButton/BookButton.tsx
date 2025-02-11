@@ -2,20 +2,14 @@ import React from 'react'
 import styles from './BookButton.module.css'
 import { Book as BookType } from '@/payload-types'
 import Image from 'next/image'
-
+import bookVars from '@/hooks/bookVars'
 type BookProps = {
   book: BookType
 }
 
 export default function BookButton({ book }: BookProps) {
-  const imageSrc = `${process.env.NEXT_PUBLIC_SERVER_URL}/api/media/file/${book.image.filename}`
-  // const imageSrc =
-  //   typeof book.image !== 'string' && book.image?.filename
-  //     ? `${process.env.NEXT_PUBLIC_SERVER_URL}/api/media/file/${book.image.filename}`
-  //     : ''
-
-  // const imageAlt = typeof book.image !== 'string' ? book.image?.alt || '' : ''
-  // const authorName = typeof book.author !== 'string' ? book.author?.name || '' : ''
+  const { imageSrc, imageAlt, author, series, bookNumber, published, description, rating } =
+    bookVars(book)
 
   return (
     <button className={styles.book}>
@@ -23,8 +17,9 @@ export default function BookButton({ book }: BookProps) {
         <Image src={imageSrc} alt={imageAlt} width={200} height={300} />
       </div>
       <div className={styles.bookContent}>
-        <div className={styles.bookTitle}>{book.title}</div>
-        <div className={styles.bookAuthor}>{book.author.name}</div>
+        <h2 className={styles.bookTitle}>{book.title}</h2>
+        <h3 className={styles.bookAuthor}>{author}</h3>
+        <p className={styles.bookSeries}>{series}</p>
       </div>
     </button>
   )

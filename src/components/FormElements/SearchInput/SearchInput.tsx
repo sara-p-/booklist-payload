@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import styles from './Input.module.css'
+import styles from './SearchInput.module.css'
 import VisuallyHidden from '@/components/VisuallyHidden/VisuallyHidden'
 
 type InputProps = {
@@ -12,7 +12,7 @@ type InputProps = {
   args?: React.InputHTMLAttributes<HTMLInputElement>
 }
 
-export default function Input({ label, placeholder, icon, args, onChange }: InputProps) {
+export default function SearchInput({ label, placeholder, icon, args, onChange }: InputProps) {
   const [value, setValue] = React.useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

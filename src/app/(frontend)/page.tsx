@@ -7,12 +7,14 @@ import { fileURLToPath } from 'url'
 import config from '@/payload.config'
 import './styles.css'
 import Sidebar from '@/components/Sidebar/Sidebar'
+import MainContent from '@/components/MainContent/MainContent'
+
 export default async function HomePage() {
   const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
-  const books = await payload.find({ collection: 'book' })
+  const books = await payload.find({ collection: 'book', depth: 2 })
 
   console.log(books)
 
@@ -21,6 +23,7 @@ export default async function HomePage() {
   return (
     <div className="home">
       <Sidebar />
+      <MainContent books={books.docs} />
       {/* <div className="content">
         <picture>
           <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />

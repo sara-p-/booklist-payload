@@ -19,6 +19,7 @@ export const Book: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -30,11 +31,13 @@ export const Book: CollectionConfig = {
           name: 'author',
           type: 'relationship',
           relationTo: 'author',
+          required: true,
         },
         {
           name: 'series',
           type: 'relationship',
           relationTo: 'series',
+          required: true,
         },
       ],
     },
@@ -45,10 +48,12 @@ export const Book: CollectionConfig = {
         {
           name: 'bookNumber',
           type: 'number',
+          required: true,
         },
         {
           name: 'published',
           type: 'date',
+          required: true,
         },
         {
           name: 'length',
@@ -61,6 +66,7 @@ export const Book: CollectionConfig = {
       type: 'number',
       min: 0,
       max: 10,
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -70,6 +76,7 @@ export const Book: CollectionConfig = {
       type: 'number',
       min: 0,
       max: 5,
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -79,6 +86,7 @@ export const Book: CollectionConfig = {
       name: 'finished',
       type: 'checkbox',
       defaultValue: true,
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -87,6 +95,7 @@ export const Book: CollectionConfig = {
       name: 'show',
       type: 'checkbox',
       defaultValue: true,
+      required: true,
       admin: {
         position: 'sidebar',
       },
@@ -96,6 +105,7 @@ export const Book: CollectionConfig = {
       type: 'relationship',
       relationTo: 'tag',
       hasMany: true,
+      required: true,
       admin: {
         position: 'sidebar',
       },

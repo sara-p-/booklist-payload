@@ -12,9 +12,7 @@ export default function MainContent({ books }: MainContentProps) {
     <div className={styles.mainContent}>
       <div className={styles.mainWrapper}>
         <div className={styles.bookGrid}>
-          {books.map((book) => (
-            <BookButton key={book.id} book={book} />
-          ))}
+          {books && books.map((book) => <BookButton key={book.id} book={book} />)}
         </div>
       </div>
     </div>

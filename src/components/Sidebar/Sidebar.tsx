@@ -8,8 +8,27 @@ import SidebarHeader from './SidebarHeader/SidebarHeader'
 import SelectField from '@/components/FormElements/SelectField/SelectField'
 import TagsBox from './TagsBox/TagsBox'
 import CheckboxTag from '@/components/FormElements/CheckboxTag/CheckboxTag'
+import { Book } from '@/payload-types'
 
-export default function Sidebar() {
+type SidebarProps = {
+  books: Book[]
+}
+
+export default function Sidebar({ books }: SidebarProps) {
+  let authorOptions: string[] = []
+  if (books !== undefined) {
+    authorOptions = books
+      .map((book) => {
+        if (typeof book.author !== 'string') {
+          return book.author.name
+        }
+        return undefined
+      })
+      .filter((name): name is string => name !== undefined)
+  }
+
+  console.log(authorOptions)
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.wrapper}>

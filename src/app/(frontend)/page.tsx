@@ -10,7 +10,7 @@ export default function HomePage() {
 
   return (
     <div className="home">
-      <Sidebar />
+      <Sidebar books={data?.docs} />
       <MainContent books={data?.docs} />
     </div>
   )

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import styles from './Sidebar.module.css'
 import Fieldset from '@/components/FormElements/Fieldset/Fieldset'

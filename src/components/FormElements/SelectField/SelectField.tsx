@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 type SelectFieldProps = {
-  options: { label: string; value: string }[]
+  options: string[]
   label: string
   onChange?: (value: string) => void
 }
@@ -33,8 +33,8 @@ export default function SelectField({ options, label, onChange }: SelectFieldPro
         <Select.Content className={styles.content} position="popper" align="start" sideOffset={0}>
           <Select.Viewport>
             {options.map((option, index) => (
-              <Select.Item key={index} value={option.value} className={styles.item}>
-                <Select.ItemText>{option.label}</Select.ItemText>
+              <Select.Item key={index} value={option} className={styles.item}>
+                <Select.ItemText>{option}</Select.ItemText>
                 <Select.ItemIndicator />
               </Select.Item>
             ))}

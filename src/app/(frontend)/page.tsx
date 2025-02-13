@@ -4,14 +4,14 @@ import './styles.css'
 import Sidebar from '@/components/Sidebar/Sidebar'
 import MainContent from '@/components/MainContent/MainContent'
 import useGetBooks from '@/hooks/useGetBooks'
+import { BookSettingsProvider } from '@/contexts/bookSettingsProvider'
+import { BookProvider, useBookContext } from '@/contexts/bookProvider'
 
 export default function HomePage() {
-  const { data } = useGetBooks()
-
   return (
     <div className="home">
-      <Sidebar books={data?.docs} />
-      <MainContent books={data?.docs} />
+      <Sidebar />
+      <MainContent />
     </div>
   )
 }

@@ -1,17 +1,30 @@
+'use client'
+
 import { Book } from '@/payload-types'
 import React from 'react'
-
+import useGetBooks from '@/hooks/useGetBooks'
 interface BookContextType {
   books: Book[]
-  setBooks: (books: Book[]) => void
+  updateBooks: (books: Book[]) => void
 }
 
 export const BookContext = React.createContext<BookContextType | null>(null)
 
 export const BookProvider = ({ children }: { children: React.ReactNode }) => {
+  const { data } = useGetBooks()
   const [books, setBooks] = React.useState<Book[]>([])
 
-  return <BookContext.Provider value={{ books, setBooks }}>{children}</BookContext.Provider>
+  function updateBooks(newBooks: Book[]) {
+    setBooks(newBooks)
+  }
+
+  React.useEffect(() => {
+    if (data) {
+      updateBooks(data.docs)
+    }
+  }, [data])
+
+  return <BookContext.Provider value={{ books, updateBooks }}>{children}</BookContext.Provider>
 }
 
 export function useBookContext() {

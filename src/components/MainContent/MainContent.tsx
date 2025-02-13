@@ -2,12 +2,19 @@ import { Book } from '@/payload-types'
 import React from 'react'
 import styles from './MainContent.module.css'
 import BookButton from '@/components/BookButton/BookButton'
+import { useBookContext } from '@/contexts/bookProvider'
+import useGetBooks from '@/hooks/useGetBooks'
 
-type MainContentProps = {
-  books: Book[]
-}
+export default function MainContent() {
+  const { books, updateBooks } = useBookContext()
+  // const { data } = useGetBooks()
 
-export default function MainContent({ books }: MainContentProps) {
+  // React.useEffect(() => {
+  //   if (data) {
+  //     updateBooks(data.docs)
+  //   }
+  // }, [])
+
   return (
     <div className={styles.mainContent}>
       <div className={styles.mainWrapper}>

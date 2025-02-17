@@ -12,6 +12,9 @@
   font-weight: 400;
   position: relative;
   cursor: pointer;
+  &:nth-of-type(2) {
+    margin-top: var(--main-spacing);
+  }
 }
 
 .content {

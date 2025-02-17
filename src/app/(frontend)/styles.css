@@ -11,7 +11,7 @@
   text-transform: lowercase;
 
   box-sizing: border-box;
-  --main-padding: 16px;
+  --main-spacing: 16px;
 
   /* Colors */
   --black: #242424;

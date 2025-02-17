@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px var(--main-padding);
+  padding: 8px var(--main-spacing);
 }
 
 .h1 {

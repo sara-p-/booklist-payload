@@ -12,15 +12,28 @@ import TagsBox from './TagsBox/TagsBox'
 import CheckboxTag from '@/components/FormElements/CheckboxTag/CheckboxTag'
 import { Book } from '@/payload-types'
 import { useBookContext } from '@/contexts/bookProvider'
-import useCreateSelectOptions from '@/hooks/useCreateFormOptions'
+import useCreateSelectOptions from '@/hooks/useCreateSelectOptions'
+import { SORT_OPTIONS } from '@/global/global-variables'
+import useCreateTags from '@/hooks/useCreateTags'
+
 export default function Sidebar() {
   const { books } = useBookContext()
 
+  // console.log(books)
+
   const authorOptions = useCreateSelectOptions(books, 'author', 'name')
   const seriesOptions = useCreateSelectOptions(books, 'series', 'title')
+  const tags = useCreateTags(books)
+
+  console.log(tags)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log('submit')
+  }
 
   return (
-    <div className={styles.sidebar}>
+    <form onSubmit={handleSubmit} className={styles.sidebar}>
       <div className={styles.wrapper}>
         <SidebarHeader />
         <Fieldset title="search">
@@ -31,10 +44,7 @@ export default function Sidebar() {
           />
         </Fieldset>
         <Fieldset title="sort">
-          <SelectField
-            label="series"
-            options={['series', 'title', 'rating', 'published', 'length']}
-          />
+          <SelectField label="series" options={SORT_OPTIONS} />
         </Fieldset>
         <Fieldset title="filters">
           <SelectField label="author" options={authorOptions} />
@@ -42,21 +52,19 @@ export default function Sidebar() {
         </Fieldset>
         <Fieldset title="tags">
           <TagsBox>
-            {['tag1', 'tag2', 'tag3', 'tag4', 'tag5', 'tag6', 'tag7', 'tag8', 'tag9', 'tag10'].map(
-              (tag) => (
-                <CheckboxTag
-                  key={tag}
-                  label={tag}
-                  value={tag}
-                  name={tag}
-                  checked={false}
-                  onChange={() => {}}
-                />
-              ),
-            )}
+            {tags.map((tag) => (
+              <CheckboxTag
+                key={tag.id}
+                label={tag.tag}
+                value={tag.tag}
+                name={tag.tag}
+                checked={false}
+                onChange={() => {}}
+              />
+            ))}
           </TagsBox>
         </Fieldset>
       </div>
-    </div>
+    </form>
   )
 }

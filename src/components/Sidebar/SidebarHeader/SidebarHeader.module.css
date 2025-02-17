@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px var(--main-padding);
+  padding: 12px var(--main-spacing);
 }
 
 .title {

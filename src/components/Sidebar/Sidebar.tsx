@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Sidebar.module.css'
 import Fieldset from '@/components/FormElements/Fieldset/Fieldset'
 import SearchInput from '@/components/FormElements/SearchInput/SearchInput'
@@ -18,14 +18,29 @@ import useCreateTags from '@/hooks/useCreateTags'
 
 export default function Sidebar() {
   const { books } = useBookContext()
+  const [selectedTags, setSelectedTags] = React.useState<string[]>([])
+  const [selectedAuthor, setSelectedAuthor] = React.useState<string | null>(null)
+  const [selectedSeries, setSelectedSeries] = React.useState<string | null>(null)
 
-  // console.log(books)
+  function handleTagChange(tag: string) {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags((prev) => prev.filter((t) => t !== tag))
+    } else {
+      setSelectedTags((prev) => [...prev, tag])
+    }
+  }
+
+  function handleAuthorChange(author: string) {
+    setSelectedAuthor(author)
+  }
+
+  function handleSeriesChange(series: string) {
+    setSelectedSeries(series)
+  }
 
   const authorOptions = useCreateSelectOptions(books, 'author', 'name')
   const seriesOptions = useCreateSelectOptions(books, 'series', 'title')
   const tags = useCreateTags(books)
-
-  console.log(tags)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -47,19 +62,22 @@ export default function Sidebar() {
           <SelectField label="series" options={SORT_OPTIONS} />
         </Fieldset>
         <Fieldset title="filters">
-          <SelectField label="author" options={authorOptions} />
-          <SelectField label="series" options={seriesOptions} />
+          <SelectField
+            label="author"
+            options={authorOptions}
+            onChange={handleAuthorChange}
+            value={selectedAuthor}
+          />
+          <SelectField label="series" options={seriesOptions} onChange={handleSeriesChange} />
         </Fieldset>
         <Fieldset title="tags">
           <TagsBox>
             {tags.map((tag) => (
               <CheckboxTag
                 key={tag.id}
-                label={tag.tag}
                 value={tag.tag}
-                name={tag.tag}
-                checked={false}
-                onChange={() => {}}
+                checked={selectedTags.includes(tag.tag)}
+                onChange={handleTagChange}
               />
             ))}
           </TagsBox>

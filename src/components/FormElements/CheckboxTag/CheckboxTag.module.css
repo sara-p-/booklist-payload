@@ -9,7 +9,11 @@
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  &:checked {
+  &[data-state='checked'] {
+    background-color: var(--primary);
+    color: var(--secondary);
+  }
+  &:hover {
     background-color: var(--primary);
     color: var(--secondary);
   }

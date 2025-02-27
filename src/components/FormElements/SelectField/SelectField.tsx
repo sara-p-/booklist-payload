@@ -9,15 +9,13 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 type SelectFieldProps = {
   options: string[]
   label: string
-  onChange?: (value: string) => void
+  onChange: (value: string) => void
+  value: string
 }
 
-export default function SelectField({ options, label, onChange }: SelectFieldProps) {
-  const [value, setValue] = React.useState('')
-
+export default function SelectField({ options, label, onChange, value }: SelectFieldProps) {
   function handleChange(value: string) {
-    setValue(value)
-    onChange?.(value)
+    onChange(value)
   }
 
   return (

@@ -1,23 +1,16 @@
 'use client'
 import React from 'react'
-
-type BookSettings = {
-  order: 'asc' | 'desc'
-  sort: 'series' | 'title' | 'rating' | 'published' | 'length'
-  author: string
-  series: string
-  tags: string[]
-}
+import { BookSettingsType } from '@/types/types'
 
 type BookSettingsContextType = {
-  bookSettings: BookSettings
-  setBookSettings: (bookSettings: BookSettings) => void
+  bookSettings: BookSettingsType
+  setBookSettings: (bookSettings: BookSettingsType) => void
 }
 
 const BookSettingsContext = React.createContext<BookSettingsContextType | null>(null)
 
 export const BookSettingsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [bookSettings, setBookSettings] = React.useState<BookSettings>({
+  const [bookSettings, setBookSettings] = React.useState<BookSettingsType>({
     order: 'asc',
     sort: 'series',
     author: '',

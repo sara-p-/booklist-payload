@@ -15,18 +15,26 @@ import { useBookContext } from '@/contexts/bookProvider'
 import useCreateSelectOptions from '@/hooks/useCreateSelectOptions'
 import { SORT_OPTIONS } from '@/global/global-variables'
 import useCreateTags from '@/hooks/useCreateTags'
+import { useBookSettings } from '@/contexts/bookSettingsProvider'
+import { SortType } from '@/types/types'
 
 export default function Sidebar() {
   const { books } = useBookContext()
+  const { bookSettings, setBookSettings } = useBookSettings()
+  const [selectedSort, setSelectedSort] = React.useState<SortType>('series')
   const [selectedTags, setSelectedTags] = React.useState<string[]>([])
-  const [selectedAuthor, setSelectedAuthor] = React.useState<string | null>(null)
-  const [selectedSeries, setSelectedSeries] = React.useState<string | null>(null)
+  const [selectedAuthor, setSelectedAuthor] = React.useState<string | undefined>(undefined)
+  const [selectedSeries, setSelectedSeries] = React.useState<string | undefined>(undefined)
+
+  function handleSortChange(sort: SortType) {
+    setBookSettings({ ...bookSettings, sort })
+  }
 
   function handleTagChange(tag: string) {
-    if (selectedTags.includes(tag)) {
-      setSelectedTags((prev) => prev.filter((t) => t !== tag))
+    if (bookSettings.tags.includes(tag)) {
+      setBookSettings({ ...bookSettings, tags: bookSettings.tags.filter((t) => t !== tag) })
     } else {
-      setSelectedTags((prev) => [...prev, tag])
+      setBookSettings({ ...bookSettings, tags: [...bookSettings.tags, tag] })
     }
   }
 
@@ -38,6 +46,18 @@ export default function Sidebar() {
     setSelectedSeries(series)
   }
 
+  function handleFilterChange(filter: string, value: string) {
+    if (filter === 'tags') {
+      if (bookSettings.tags.includes(value)) {
+        setBookSettings({ ...bookSettings, tags: bookSettings.tags.filter((t) => t !== value) })
+      } else {
+        setBookSettings({ ...bookSettings, tags: [...bookSettings.tags, value] })
+      }
+    } else {
+      setBookSettings({ ...bookSettings, [filter]: value })
+    }
+  }
+
   const authorOptions = useCreateSelectOptions(books, 'author', 'name')
   const seriesOptions = useCreateSelectOptions(books, 'series', 'title')
   const tags = useCreateTags(books)
@@ -46,6 +66,8 @@ export default function Sidebar() {
     e.preventDefault()
     console.log('submit')
   }
+
+  console.log({ bookSettings })
 
   return (
     <form onSubmit={handleSubmit} className={styles.sidebar}>
@@ -59,16 +81,26 @@ export default function Sidebar() {
           />
         </Fieldset>
         <Fieldset title="sort">
-          <SelectField label="series" options={SORT_OPTIONS} />
+          <SelectField
+            label="sort"
+            options={SORT_OPTIONS}
+            onChange={(value) => handleFilterChange('sort', value)}
+            value={bookSettings.sort}
+          />
         </Fieldset>
         <Fieldset title="filters">
           <SelectField
             label="author"
             options={authorOptions}
-            onChange={handleAuthorChange}
-            value={selectedAuthor}
+            onChange={(value) => handleFilterChange('author', value)}
+            value={bookSettings.author}
           />
-          <SelectField label="series" options={seriesOptions} onChange={handleSeriesChange} />
+          <SelectField
+            label="series"
+            options={seriesOptions}
+            onChange={(value) => handleFilterChange('series', value)}
+            value={bookSettings.series}
+          />
         </Fieldset>
         <Fieldset title="tags">
           <TagsBox>
@@ -76,8 +108,8 @@ export default function Sidebar() {
               <CheckboxTag
                 key={tag.id}
                 value={tag.tag}
-                checked={selectedTags.includes(tag.tag)}
-                onChange={handleTagChange}
+                checked={bookSettings.tags.includes(tag.tag)}
+                onChange={(value) => handleFilterChange('tags', value)}
               />
             ))}
           </TagsBox>

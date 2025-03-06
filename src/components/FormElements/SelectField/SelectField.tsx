@@ -10,12 +10,16 @@ type SelectFieldProps = {
   options: string[]
   label: string
   onChange: (value: string) => void
-  value: string
+  value: string | undefined
 }
 
 export default function SelectField({ options, label, onChange, value }: SelectFieldProps) {
-  function handleChange(value: string) {
-    onChange(value)
+  function handleChange(value: string | undefined) {
+    if (value === undefined) {
+      onChange('')
+    } else {
+      onChange(value)
+    }
   }
 
   return (

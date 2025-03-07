@@ -21,6 +21,10 @@ export default function SearchInput({
   onChange,
   value,
 }: InputProps) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    onChange(e.target.value)
+  }
+
   return (
     <div className={styles.inputWrapper}>
       <label htmlFor="" className={styles.label}>
@@ -31,7 +35,7 @@ export default function SearchInput({
         type="text"
         className={styles.input}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleChange}
         placeholder={placeholder}
         {...args}
       />

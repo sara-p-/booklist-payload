@@ -1,3 +1,7 @@
+.root {
+  width: 100%;
+}
+
 .trigger {
   display: flex;
   justify-content: space-between;
@@ -5,16 +9,26 @@
   width: 100%;
   padding: 0 14px;
   height: 50px;
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   border: var(--border-thin);
   border-top: var(--border-thick);
   font-size: 1rem;
   font-weight: 400;
   position: relative;
   cursor: pointer;
+  box-sizing: border-box;
   &:nth-of-type(2) {
     margin-top: var(--main-spacing);
   }
+}
+
+.value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 }
 
 .content {

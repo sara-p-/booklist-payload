@@ -14,18 +14,20 @@ type SelectFieldProps = {
 }
 
 export default function SelectField({ options, label, onChange, value }: SelectFieldProps) {
-  // function handleChange(value: string | undefined) {
-  //   if (value === undefined) {
-  //     onChange('')
-  //   } else {
-  //     onChange(value)
-  //   }
-  // }
+  function handleChange(value: string | undefined) {
+    if (value === undefined) {
+      onChange('')
+    } else {
+      onChange(value)
+    }
+  }
 
   return (
-    <Select.Root value={value} onValueChange={(value) => onChange(value)}>
+    <Select.Root className={styles.root} value={value} onValueChange={handleChange}>
       <Select.Trigger className={styles.trigger}>
-        <Select.Value placeholder={label} />
+        <Select.Value className={styles.value} placeholder={label}>
+          {`${label}: ${value}`}
+        </Select.Value>
         <Select.Icon>
           <FontAwesomeIcon icon={faChevronDown} />
         </Select.Icon>

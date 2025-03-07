@@ -14,8 +14,8 @@ export const BookSettingsProvider = ({ children }: { children: React.ReactNode }
     order: 'asc',
     search: '',
     sort: 'series',
-    author: '',
-    series: '',
+    author: 'all',
+    series: 'all',
     tags: [],
   })
 

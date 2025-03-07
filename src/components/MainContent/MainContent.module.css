@@ -10,10 +10,17 @@
   padding: var(--main-spacing);
 }
 
-.bookGrid {
+.booksContainer {
   width: 100%;
   height: auto;
+}
+
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--main-spacing);
+}
+
+.list {
+  display: block;
 }

@@ -9,13 +9,17 @@ type CheckboxTagProps = {
 }
 
 export default function CheckboxTag({ value, checked, onChange }: CheckboxTagProps) {
+  function handleChange() {
+    onChange(value)
+  }
+
   return (
     <Checkbox.Root
       className={styles.checkbox}
       value={value}
       name={value}
       checked={checked}
-      onCheckedChange={() => onChange(value)}
+      onCheckedChange={handleChange}
     >
       {value}
     </Checkbox.Root>

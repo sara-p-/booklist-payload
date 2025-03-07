@@ -30,7 +30,7 @@ export default function useCreateDropdownOptions() {
         .filter((name): name is string => name !== undefined)
     }
 
-    return options
+    return ['all', ...options]
   }
 
   // Create dropdown options

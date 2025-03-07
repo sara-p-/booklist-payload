@@ -4,6 +4,8 @@ import Header from '@/components/Header/Header'
 import { Inter } from 'next/font/google'
 import { BookProvider } from '@/contexts/bookProvider'
 import { BookSettingsProvider } from '@/contexts/bookSettingsProvider'
+import { ViewProvider } from '@/contexts/viewProvider'
+import { ThemeProvider } from '@/contexts/themeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,14 +19,18 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en" className={inter.className}>
-      <BookSettingsProvider>
-        <BookProvider>
-          <body>
-            <Header />
-            <main>{children}</main>
-          </body>
-        </BookProvider>
-      </BookSettingsProvider>
+      <ThemeProvider>
+        <ViewProvider>
+          <BookSettingsProvider>
+            <BookProvider>
+              <body>
+                <Header />
+                <main>{children}</main>
+              </body>
+            </BookProvider>
+          </BookSettingsProvider>
+        </ViewProvider>
+      </ThemeProvider>
     </html>
   )
 }

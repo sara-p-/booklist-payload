@@ -12,7 +12,7 @@ export default function BookButton({ book }: BookProps) {
     bookVars(book)
 
   return (
-    <button className={styles.book}>
+    <button className={styles.bookButton}>
       <div className={styles.bookImage}>
         <Image src={imageSrc} alt={imageAlt} width={200} height={300} />
       </div>

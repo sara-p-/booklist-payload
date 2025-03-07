@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './Sidebar.module.css'
 import Fieldset from '@/components/FormElements/Fieldset/Fieldset'
 import SearchInput from '@/components/FormElements/SearchInput/SearchInput'
@@ -10,64 +10,28 @@ import SidebarHeader from './SidebarHeader/SidebarHeader'
 import SelectField from '@/components/FormElements/SelectField/SelectField'
 import TagsBox from './TagsBox/TagsBox'
 import CheckboxTag from '@/components/FormElements/CheckboxTag/CheckboxTag'
-import { Book } from '@/payload-types'
 import { useBookContext } from '@/contexts/bookProvider'
-import useCreateSelectOptions from '@/hooks/useCreateSelectOptions'
+import useCreateDropdownOptions from '@/hooks/useCreateDropdownOptions'
 import { SORT_OPTIONS } from '@/global/global-variables'
 import useCreateTags from '@/hooks/useCreateTags'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
-import { SortType } from '@/types/types'
+import { useHandleFilterChange } from '@/hooks/useHandleFilterChange'
 
 export default function Sidebar() {
+  // Get books and settings from the 2 different providers
   const { books } = useBookContext()
-  const { bookSettings, setBookSettings } = useBookSettings()
-  const [selectedSort, setSelectedSort] = React.useState<SortType>('series')
-  const [selectedTags, setSelectedTags] = React.useState<string[]>([])
-  const [selectedAuthor, setSelectedAuthor] = React.useState<string | undefined>(undefined)
-  const [selectedSeries, setSelectedSeries] = React.useState<string | undefined>(undefined)
-
-  function handleSortChange(sort: SortType) {
-    setBookSettings({ ...bookSettings, sort })
-  }
-
-  function handleTagChange(tag: string) {
-    if (bookSettings.tags.includes(tag)) {
-      setBookSettings({ ...bookSettings, tags: bookSettings.tags.filter((t) => t !== tag) })
-    } else {
-      setBookSettings({ ...bookSettings, tags: [...bookSettings.tags, tag] })
-    }
-  }
-
-  function handleAuthorChange(author: string) {
-    setSelectedAuthor(author)
-  }
-
-  function handleSeriesChange(series: string) {
-    setSelectedSeries(series)
-  }
-
-  function handleFilterChange(filter: string, value: string) {
-    if (filter === 'tags') {
-      if (bookSettings.tags.includes(value)) {
-        setBookSettings({ ...bookSettings, tags: bookSettings.tags.filter((t) => t !== value) })
-      } else {
-        setBookSettings({ ...bookSettings, tags: [...bookSettings.tags, value] })
-      }
-    } else {
-      setBookSettings({ ...bookSettings, [filter]: value })
-    }
-  }
-
-  const authorOptions = useCreateSelectOptions(books, 'author', 'name')
-  const seriesOptions = useCreateSelectOptions(books, 'series', 'title')
+  const { bookSettings } = useBookSettings()
+  // Function to set the changes in the book settings based on user input
+  const { handleFilterChange } = useHandleFilterChange()
+  // Create author and series dropdown options
+  const { authorOptions, seriesOptions } = useCreateDropdownOptions()
+  // Create tags
   const tags = useCreateTags(books)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('submit')
   }
-
-  console.log({ bookSettings })
 
   return (
     <form onSubmit={handleSubmit} className={styles.sidebar}>
@@ -78,6 +42,8 @@ export default function Sidebar() {
             label="Search"
             placeholder="Search"
             icon={<FontAwesomeIcon icon={faSearch} style={{ width: '14px' }} />}
+            value={bookSettings.search}
+            onChange={(value) => handleFilterChange('search', value)}
           />
         </Fieldset>
         <Fieldset title="sort">

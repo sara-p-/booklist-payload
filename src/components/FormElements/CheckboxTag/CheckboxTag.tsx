@@ -1,7 +1,6 @@
 import React from 'react'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import styles from './CheckboxTag.module.css'
-import { log } from 'console'
 
 type CheckboxTagProps = {
   value: string

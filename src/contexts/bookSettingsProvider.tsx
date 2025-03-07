@@ -12,6 +12,7 @@ const BookSettingsContext = React.createContext<BookSettingsContextType | null>(
 export const BookSettingsProvider = ({ children }: { children: React.ReactNode }) => {
   const [bookSettings, setBookSettings] = React.useState<BookSettingsType>({
     order: 'asc',
+    search: '',
     sort: 'series',
     author: '',
     series: '',

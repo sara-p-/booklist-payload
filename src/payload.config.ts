@@ -13,7 +13,7 @@ import { Author } from './collections/Author'
 import { Book } from './collections/Book'
 import { Series } from './collections/Series'
 import { Tag } from './collections/Tag'
-
+import { Genre } from './collections/Genre'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -25,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Author, Book, Series, Tag],
+  collections: [Users, Media, Author, Book, Series, Tag, Genre],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

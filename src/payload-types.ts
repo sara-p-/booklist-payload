@@ -17,6 +17,7 @@ export interface Config {
     book: Book;
     series: Series;
     tag: Tag;
+    genre: Genre;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -29,6 +30,7 @@ export interface Config {
     book: BookSelect<false> | BookSelect<true>;
     series: SeriesSelect<false> | SeriesSelect<true>;
     tag: TagSelect<false> | TagSelect<true>;
+    genre: GenreSelect<false> | GenreSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -141,6 +143,7 @@ export interface Book {
   finished: boolean;
   show: boolean;
   tags: (string | Tag)[];
+  genre: (string | Genre)[];
   description?: {
     root: {
       type: string;
@@ -212,6 +215,17 @@ export interface Tag {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genre".
+ */
+export interface Genre {
+  id: string;
+  title: string;
+  books?: (string | Book)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -240,6 +254,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tag';
         value: string | Tag;
+      } | null)
+    | ({
+        relationTo: 'genre';
+        value: string | Genre;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -343,6 +361,7 @@ export interface BookSelect<T extends boolean = true> {
   finished?: T;
   show?: T;
   tags?: T;
+  genre?: T;
   description?: T;
   notes?: T;
   smell?: T;
@@ -366,6 +385,16 @@ export interface SeriesSelect<T extends boolean = true> {
  * via the `definition` "tag_select".
  */
 export interface TagSelect<T extends boolean = true> {
+  title?: T;
+  books?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genre_select".
+ */
+export interface GenreSelect<T extends boolean = true> {
   title?: T;
   books?: T;
   updatedAt?: T;

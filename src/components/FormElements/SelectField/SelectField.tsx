@@ -23,12 +23,12 @@ export default function SelectField({ options, label, onChange, value }: SelectF
   }
 
   return (
-    <Select.Root className={styles.root} value={value} onValueChange={handleChange}>
+    <Select.Root value={value} onValueChange={handleChange}>
       <Select.Trigger className={styles.trigger}>
-        <Select.Value className={styles.value} placeholder={label}>
-          {`${label}: ${value}`}
+        <Select.Value className={styles.value} placeholder={label} asChild={true}>
+          <span className={styles.label}>{`${label}: ${value}`}</span>
         </Select.Value>
-        <Select.Icon>
+        <Select.Icon className={styles.icon}>
           <FontAwesomeIcon icon={faChevronDown} />
         </Select.Icon>
       </Select.Trigger>

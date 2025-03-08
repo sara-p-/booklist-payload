@@ -1,12 +1,9 @@
-.root {
-  width: 100%;
-}
-
 .trigger {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 228px;
   padding: 0 14px;
   height: 50px;
   white-space: nowrap;
@@ -24,10 +21,23 @@
   }
 }
 
+.label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+
+.icon {
+}
+
 .value {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -43,13 +53,16 @@
 }
 
 .item {
-  width: 100%;
+  width: auto;
   padding: 8px 16px;
   border-bottom: var(--border-thin);
   font-weight: 400;
-  display: flex;
-  align-items: center;
+  display: block;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
   &:hover,
   &:focus {
     background-color: var(--primary);

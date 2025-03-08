@@ -112,6 +112,16 @@ export const Book: CollectionConfig = {
       },
     },
     {
+      name: 'genre',
+      type: 'relationship',
+      relationTo: 'genre',
+      hasMany: true,
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'description',
       type: 'richText',
     },

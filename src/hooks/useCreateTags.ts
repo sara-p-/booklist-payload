@@ -1,17 +1,13 @@
-import { Book } from '@/payload-types'
+import { Tag } from '@/payload-types'
+import useGetStuff from './useGetStuff'
 
-export default function useCreateTags(books: Book[]) {
-  const allTags = books.map((book) => {
-    if (book.tags && typeof book.tags === 'object') {
-      return book.tags.map((tag) =>
-        typeof tag === 'string' ? { tag, id: tag } : { tag: tag.title, id: tag.id },
-      )
-    } else {
-      return []
-    }
-  })
+export default function useCreateTags() {
+  // pull in the tags
+  const { data: tagList } = useGetStuff('tags')
 
-  const uniqueTags = [...new Set(allTags.flat())]
+  console.log({ tagList: tagList?.docs })
 
-  return uniqueTags
+  const tags = tagList?.docs?.map((tag: Tag) => tag.title)
+
+  return tags
 }

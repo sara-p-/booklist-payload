@@ -13,11 +13,11 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    author: Author;
-    book: Book;
+    authors: Author;
+    books: Book;
     series: Series;
-    tag: Tag;
-    genre: Genre;
+    tags: Tag;
+    genres: Genre;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -26,11 +26,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    author: AuthorSelect<false> | AuthorSelect<true>;
-    book: BookSelect<false> | BookSelect<true>;
+    authors: AuthorsSelect<false> | AuthorsSelect<true>;
+    books: BooksSelect<false> | BooksSelect<true>;
     series: SeriesSelect<false> | SeriesSelect<true>;
-    tag: TagSelect<false> | TagSelect<true>;
-    genre: GenreSelect<false> | GenreSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
+    genres: GenresSelect<false> | GenresSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -105,7 +105,7 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "author".
+ * via the `definition` "authors".
  */
 export interface Author {
   id: string;
@@ -113,7 +113,7 @@ export interface Author {
   books?:
     | (
         | {
-            relationTo: 'book';
+            relationTo: 'books';
             value: string | Book;
           }
         | {
@@ -127,7 +127,7 @@ export interface Author {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "book".
+ * via the `definition` "books".
  */
 export interface Book {
   id: string;
@@ -143,7 +143,7 @@ export interface Book {
   finished: boolean;
   show: boolean;
   tags: (string | Tag)[];
-  genre: (string | Genre)[];
+  genres: (string | Genre)[];
   bookId: number;
   description?: {
     root: {
@@ -191,11 +191,11 @@ export interface Series {
   books?:
     | (
         | {
-            relationTo: 'book';
+            relationTo: 'books';
             value: string | Book;
           }
         | {
-            relationTo: 'author';
+            relationTo: 'authors';
             value: string | Author;
           }
       )[]
@@ -205,7 +205,7 @@ export interface Series {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tag".
+ * via the `definition` "tags".
  */
 export interface Tag {
   id: string;
@@ -216,7 +216,7 @@ export interface Tag {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "genre".
+ * via the `definition` "genres".
  */
 export interface Genre {
   id: string;
@@ -241,11 +241,11 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'author';
+        relationTo: 'authors';
         value: string | Author;
       } | null)
     | ({
-        relationTo: 'book';
+        relationTo: 'books';
         value: string | Book;
       } | null)
     | ({
@@ -253,11 +253,11 @@ export interface PayloadLockedDocument {
         value: string | Series;
       } | null)
     | ({
-        relationTo: 'tag';
+        relationTo: 'tags';
         value: string | Tag;
       } | null)
     | ({
-        relationTo: 'genre';
+        relationTo: 'genres';
         value: string | Genre;
       } | null);
   globalSlug?: string | null;
@@ -337,9 +337,9 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "author_select".
+ * via the `definition` "authors_select".
  */
-export interface AuthorSelect<T extends boolean = true> {
+export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
   books?: T;
   updatedAt?: T;
@@ -347,9 +347,9 @@ export interface AuthorSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "book_select".
+ * via the `definition` "books_select".
  */
-export interface BookSelect<T extends boolean = true> {
+export interface BooksSelect<T extends boolean = true> {
   title?: T;
   image?: T;
   author?: T;
@@ -362,7 +362,7 @@ export interface BookSelect<T extends boolean = true> {
   finished?: T;
   show?: T;
   tags?: T;
-  genre?: T;
+  genres?: T;
   bookId?: T;
   description?: T;
   notes?: T;
@@ -384,9 +384,9 @@ export interface SeriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tag_select".
+ * via the `definition` "tags_select".
  */
-export interface TagSelect<T extends boolean = true> {
+export interface TagsSelect<T extends boolean = true> {
   title?: T;
   books?: T;
   updatedAt?: T;
@@ -394,9 +394,9 @@ export interface TagSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "genre_select".
+ * via the `definition` "genres_select".
  */
-export interface GenreSelect<T extends boolean = true> {
+export interface GenresSelect<T extends boolean = true> {
   title?: T;
   books?: T;
   updatedAt?: T;

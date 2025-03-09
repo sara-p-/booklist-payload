@@ -28,6 +28,8 @@ export default function useCreateDropdownOptions() {
           return undefined
         })
         .filter((name): name is string => name !== undefined)
+        // Remove duplicates
+        .filter((value, index, self) => self.indexOf(value) === index)
     }
 
     return ['all', ...options]

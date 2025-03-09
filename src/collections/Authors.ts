@@ -1,24 +1,24 @@
 import type { CollectionConfig } from 'payload'
 
-export const Genre: CollectionConfig = {
-  slug: 'genre',
+export const Authors: CollectionConfig = {
+  slug: 'authors',
   access: {
     read: () => true,
   },
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title'],
+    useAsTitle: 'name',
+    defaultColumns: ['name'],
   },
   fields: [
     {
-      name: 'title',
+      name: 'name',
       type: 'text',
       required: true,
     },
     {
       name: 'books',
       type: 'relationship',
-      relationTo: 'book',
+      relationTo: ['books', 'series'],
       hasMany: true,
     },
   ],

@@ -18,7 +18,7 @@ export const Series: CollectionConfig = {
     {
       name: 'books',
       type: 'relationship',
-      relationTo: ['book', 'author'],
+      relationTo: ['books', 'authors'],
       hasMany: true,
     },
   ],

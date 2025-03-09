@@ -2,7 +2,7 @@
 
 import { Book } from '@/payload-types'
 import React from 'react'
-import useGetBooks from '@/hooks/useGetBooks'
+import useGetStuff from '@/hooks/useGetStuff'
 interface BookContextType {
   books: Book[]
   updateBooks: (books: Book[]) => void
@@ -11,7 +11,7 @@ interface BookContextType {
 export const BookContext = React.createContext<BookContextType | null>(null)
 
 export const BookProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data } = useGetBooks()
+  const { data } = useGetStuff('books')
   const [books, setBooks] = React.useState<Book[]>([])
 
   function updateBooks(newBooks: Book[]) {

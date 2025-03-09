@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
-export const Book: CollectionConfig = {
-  slug: 'book',
+export const Books: CollectionConfig = {
+  slug: 'books',
 
   access: {
     read: () => true,
@@ -31,7 +31,7 @@ export const Book: CollectionConfig = {
         {
           name: 'author',
           type: 'relationship',
-          relationTo: 'author',
+          relationTo: 'authors',
           required: true,
         },
         {
@@ -104,7 +104,7 @@ export const Book: CollectionConfig = {
     {
       name: 'tags',
       type: 'relationship',
-      relationTo: 'tag',
+      relationTo: 'tags',
       hasMany: true,
       required: true,
       admin: {
@@ -112,9 +112,9 @@ export const Book: CollectionConfig = {
       },
     },
     {
-      name: 'genre',
+      name: 'genres',
       type: 'relationship',
-      relationTo: 'genre',
+      relationTo: 'genres',
       hasMany: true,
       required: true,
       admin: {

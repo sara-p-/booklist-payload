@@ -70,14 +70,15 @@ export default function Sidebar() {
         </Fieldset>
         <Fieldset title="tags">
           <TagsBox>
-            {tags.map((tag) => (
-              <CheckboxTag
-                key={tag.id}
-                value={tag.tag}
-                checked={bookSettings.tags.includes(tag.tag)}
-                onChange={(value) => handleFilterChange('tags', value)}
-              />
-            ))}
+            {tags &&
+              tags.map((tag) => (
+                <CheckboxTag
+                  key={tag}
+                  value={tag}
+                  checked={bookSettings.tags.includes(tag)}
+                  onChange={(value) => handleFilterChange('tags', value)}
+                />
+              ))}
           </TagsBox>
         </Fieldset>
       </div>

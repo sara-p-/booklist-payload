@@ -8,7 +8,7 @@ export const Book: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'author', 'series', 'bookNumber', 'finishDate'],
+    defaultColumns: ['title', 'bookId', 'author', 'series', 'bookNumber', 'finishDate'],
   },
   fields: [
     {
@@ -116,6 +116,14 @@ export const Book: CollectionConfig = {
       type: 'relationship',
       relationTo: 'genre',
       hasMany: true,
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'bookId',
+      type: 'number',
       required: true,
       admin: {
         position: 'sidebar',

@@ -144,6 +144,7 @@ export interface Book {
   show: boolean;
   tags: (string | Tag)[];
   genre: (string | Genre)[];
+  bookId: number;
   description?: {
     root: {
       type: string;
@@ -362,6 +363,7 @@ export interface BookSelect<T extends boolean = true> {
   show?: T;
   tags?: T;
   genre?: T;
+  bookId?: T;
   description?: T;
   notes?: T;
   smell?: T;

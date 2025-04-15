@@ -11,15 +11,20 @@ export const Authors: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'books',
-      type: 'relationship',
-      relationTo: ['books', 'series'],
-      hasMany: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'books',
+          type: 'relationship',
+          relationTo: ['books', 'series'],
+          hasMany: true,
+        },
+      ],
     },
   ],
 }

@@ -5,6 +5,7 @@ import * as Select from '@radix-ui/react-select'
 import styles from './SelectField.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+// import { useBookSettings } from '@/contexts/bookSettingsProvider'
 
 type SelectFieldProps = {
   options: string[]
@@ -14,6 +15,8 @@ type SelectFieldProps = {
 }
 
 export default function SelectField({ options, label, onChange, value }: SelectFieldProps) {
+  // const { bookSettings, setBookSettings } = useBookSettings()
+
   function handleChange(value: string | undefined) {
     if (value === undefined) {
       onChange('')

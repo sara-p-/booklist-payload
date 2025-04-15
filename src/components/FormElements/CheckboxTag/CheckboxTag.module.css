@@ -7,8 +7,9 @@
   padding: 6px 9px;
   font-size: 14px;
   font-weight: 600;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   cursor: pointer;
+  text-transform: lowercase;
   &[data-state='checked'] {
     background-color: var(--primary);
     color: var(--secondary);

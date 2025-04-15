@@ -1,51 +1,15 @@
-import { Book } from '@/payload-types'
-import { useBookContext } from '@/contexts/bookProvider'
-type SelectOption = {
-  books: Book[]
-  selectType: string
-  selectName?: string
-}
+import { Author, Series } from '@/payload-types'
+import useGetStuff from './useGetStuff'
 
 export default function useCreateDropdownOptions() {
-  const { books } = useBookContext()
+  // Get the authors and series from the database
+  const { data: authorList } = useGetStuff('authors')
+  const { data: seriesList } = useGetStuff('series')
 
-  function createOptions({ books, selectType, selectName }: SelectOption) {
-    let options: string[] = []
-    if (books !== undefined) {
-      options = books
-        .map((book) => {
-          if (selectName) {
-            if (typeof book[selectType as keyof Book] !== 'string') {
-              return (book[selectType as keyof Book] as Record<string, string>)?.[
-                selectName as keyof Book
-              ]
-            }
-          } else {
-            if (typeof book[selectType as keyof Book] !== 'string') {
-              return book[selectType as keyof Book]
-            }
-          }
-          return undefined
-        })
-        .filter((name): name is string => name !== undefined)
-        // Remove duplicates
-        .filter((value, index, self) => self.indexOf(value) === index)
-    }
+  const authors =
+    authorList !== undefined ? authorList?.docs?.map((author: Author) => author.name) : []
+  const series =
+    seriesList !== undefined ? seriesList?.docs?.map((series: Series) => series.title) : []
 
-    return ['all', ...options]
-  }
-
-  // Create dropdown options
-  const authorOptions = createOptions({
-    books,
-    selectType: 'author',
-    selectName: 'name',
-  })
-  const seriesOptions = createOptions({
-    books,
-    selectType: 'series',
-    selectName: 'title',
-  })
-
-  return { authorOptions, seriesOptions }
+  return { authors, series }
 }

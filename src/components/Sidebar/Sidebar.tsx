@@ -10,7 +10,6 @@ import SidebarHeader from './SidebarHeader/SidebarHeader'
 import SelectField from '@/components/FormElements/SelectField/SelectField'
 import TagsBox from './TagsBox/TagsBox'
 import CheckboxTag from '@/components/FormElements/CheckboxTag/CheckboxTag'
-import { useBookContext } from '@/contexts/bookProvider'
 import useCreateDropdownOptions from '@/hooks/useCreateDropdownOptions'
 import { SORT_OPTIONS } from '@/global/global-variables'
 import useCreateTags from '@/hooks/useCreateTags'
@@ -18,15 +17,14 @@ import { useBookSettings } from '@/contexts/bookSettingsProvider'
 import { useHandleFilterChange } from '@/hooks/useHandleFilterChange'
 
 export default function Sidebar() {
-  // Get books and settings from the 2 different providers
-  const { books } = useBookContext()
+  // Get settings from the 2 different providers
   const { bookSettings } = useBookSettings()
   // Function to set the changes in the book settings based on user input
   const { handleFilterChange } = useHandleFilterChange()
   // Create author and series dropdown options
-  const { authorOptions, seriesOptions } = useCreateDropdownOptions()
+  const { authors, series } = useCreateDropdownOptions()
   // Create tags
-  const tags = useCreateTags(books)
+  const tags = useCreateTags()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -57,13 +55,13 @@ export default function Sidebar() {
         <Fieldset title="filters">
           <SelectField
             label="author"
-            options={authorOptions}
+            options={authors}
             onChange={(value) => handleFilterChange('author', value)}
             value={bookSettings.author}
           />
           <SelectField
             label="series"
-            options={seriesOptions}
+            options={series}
             onChange={(value) => handleFilterChange('series', value)}
             value={bookSettings.series}
           />
@@ -71,7 +69,7 @@ export default function Sidebar() {
         <Fieldset title="tags">
           <TagsBox>
             {tags &&
-              tags.map((tag) => (
+              tags.map((tag: string) => (
                 <CheckboxTag
                   key={tag}
                   value={tag}

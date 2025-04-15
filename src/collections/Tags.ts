@@ -11,15 +11,20 @@ export const Tags: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'books',
-      type: 'relationship',
-      relationTo: 'books',
-      hasMany: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'books',
+          type: 'relationship',
+          relationTo: 'books',
+          hasMany: true,
+        },
+      ],
     },
   ],
 }

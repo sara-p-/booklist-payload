@@ -18,11 +18,12 @@ export default function useBookOrder(): BookOrderType {
     if (books !== undefined) {
       const initialBooks = [...books]
       const sortedBooks = sortBooksBy(initialBooks, bookSettings.sort)
-      console.log({ sortedBooks })
-      if (bookSettings.order === 'asc') {
-        setBookOrder(initialBooks.sort((a: Book, b: Book) => a.title.localeCompare(b.title)))
-      } else {
-        setBookOrder(initialBooks.sort((a: Book, b: Book) => b.title.localeCompare(a.title)))
+      if (sortedBooks) {
+        if (bookSettings.order !== 'asc') {
+          setBookOrder(sortedBooks.reverse())
+        } else {
+          setBookOrder(sortedBooks)
+        }
       }
     }
   }, [books, bookSettings.order])

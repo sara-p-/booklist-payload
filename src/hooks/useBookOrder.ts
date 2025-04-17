@@ -20,13 +20,13 @@ export default function useBookOrder(): BookOrderType {
       const sortedBooks = sortBooksBy(initialBooks, bookSettings.sort)
       if (sortedBooks) {
         if (bookSettings.order !== 'asc') {
-          setBookOrder(sortedBooks.reverse())
+          setBookOrder(sortedBooks.reverse().flat())
         } else {
-          setBookOrder(sortedBooks)
+          setBookOrder(sortedBooks.flat())
         }
       }
     }
-  }, [books, bookSettings.order])
+  }, [books, bookSettings.order, bookSettings.sort])
 
   return { bookOrder, setBookOrder }
 }

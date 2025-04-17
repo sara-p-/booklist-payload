@@ -1,11 +1,11 @@
 .mainContent {
-  width: 100%;
+  width: auto;
   height: auto;
-  margin-left: 260px;
+  margin-left: 267px;
 }
 
 .mainWrapper {
-  width: 100%;
+  width: auto;
   height: auto;
   padding: var(--main-spacing);
 }

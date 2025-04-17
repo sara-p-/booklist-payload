@@ -18,4 +18,10 @@
     background-color: var(--primary);
     color: var(--secondary);
   }
+  &:disabled {
+    background-color: var(--secondary);
+    color: var(--primary);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }

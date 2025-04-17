@@ -2,7 +2,7 @@ import { Book } from '@/payload-types'
 import React from 'react'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
 import { useBookContext } from '@/contexts/bookProvider'
-import { sortBooksBy } from '@/global/array-utils'
+import { filterBooks, filterBooksByTags, sortBooksBy } from '@/utils/array-utils'
 
 type BookOrderType = {
   bookOrder: Book[]
@@ -17,7 +17,12 @@ export default function useBookOrder(): BookOrderType {
   React.useEffect(() => {
     if (books !== undefined) {
       const initialBooks = [...books]
-      const sortedBooks = sortBooksBy(initialBooks, bookSettings.sort)
+
+      // filter the books based on the filter value
+      const filteredBooks = filterBooks(initialBooks, bookSettings.author, bookSettings.series)
+      const filteredBooksByTags = filterBooksByTags(filteredBooks, bookSettings.tags)
+      // sort the books based on the sort value
+      const sortedBooks = sortBooksBy(filteredBooksByTags, bookSettings.sort)
       if (sortedBooks) {
         if (bookSettings.order !== 'asc') {
           setBookOrder(sortedBooks.reverse().flat())
@@ -26,7 +31,7 @@ export default function useBookOrder(): BookOrderType {
         }
       }
     }
-  }, [books, bookSettings.order, bookSettings.sort])
+  }, [books, bookSettings])
 
   return { bookOrder, setBookOrder }
 }

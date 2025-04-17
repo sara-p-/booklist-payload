@@ -8,7 +8,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 // import { useBookSettings } from '@/contexts/bookSettingsProvider'
 
 type SelectFieldProps = {
-  options: string[]
+  options: { name: string; id: string }[]
   label: string
   onChange: (value: string) => void
   value: string | undefined
@@ -39,9 +39,9 @@ export default function SelectField({ options, label, onChange, value }: SelectF
       <Select.Portal>
         <Select.Content className={styles.content} position="popper" align="start" sideOffset={0}>
           <Select.Viewport>
-            {options.map((option, index) => (
-              <Select.Item key={index} value={option} className={styles.item}>
-                <Select.ItemText>{option}</Select.ItemText>
+            {options.map(({ name, id }) => (
+              <Select.Item key={id} value={name} className={styles.item}>
+                <Select.ItemText>{name}</Select.ItemText>
                 <Select.ItemIndicator />
               </Select.Item>
             ))}

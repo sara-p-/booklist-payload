@@ -11,7 +11,7 @@ import SelectField from '@/components/FormElements/SelectField/SelectField'
 import TagsBox from './TagsBox/TagsBox'
 import CheckboxTag from '@/components/FormElements/CheckboxTag/CheckboxTag'
 import useCreateDropdownOptions from '@/hooks/useCreateDropdownOptions'
-import { SORT_OPTIONS } from '@/global/global-variables'
+import { SORT_FILTER_OPTIONS } from '@/global/global-variables'
 import useCreateTags from '@/hooks/useCreateTags'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
 import { useHandleFilterChange } from '@/hooks/useHandleFilterChange'
@@ -47,7 +47,7 @@ export default function Sidebar() {
         <Fieldset title="sort">
           <SelectField
             label="sort"
-            options={SORT_OPTIONS}
+            options={SORT_FILTER_OPTIONS}
             onChange={(value) => handleFilterChange('sort', value)}
             value={bookSettings.sort}
           />
@@ -55,13 +55,13 @@ export default function Sidebar() {
         <Fieldset title="filters">
           <SelectField
             label="author"
-            options={authors}
+            options={[{ name: 'all', id: 'all' }, ...authors]}
             onChange={(value) => handleFilterChange('author', value)}
             value={bookSettings.author}
           />
           <SelectField
             label="series"
-            options={series}
+            options={[{ name: 'all', id: 'all' }, ...series]}
             onChange={(value) => handleFilterChange('series', value)}
             value={bookSettings.series}
           />
@@ -69,12 +69,13 @@ export default function Sidebar() {
         <Fieldset title="tags">
           <TagsBox>
             {tags &&
-              tags.map((tag: string) => (
+              tags.map(({ title, disabled }: { title: string; disabled: boolean }) => (
                 <CheckboxTag
-                  key={tag}
-                  value={tag}
-                  checked={bookSettings.tags.includes(tag)}
+                  key={title}
+                  value={title}
+                  checked={bookSettings.tags.includes(title)}
                   onChange={(value) => handleFilterChange('tags', value)}
+                  disabled={disabled}
                 />
               ))}
           </TagsBox>

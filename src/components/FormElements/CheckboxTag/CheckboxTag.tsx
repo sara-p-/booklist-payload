@@ -6,9 +6,10 @@ type CheckboxTagProps = {
   value: string
   checked: boolean
   onChange: (tag: string) => void
+  disabled: boolean
 }
 
-export default function CheckboxTag({ value, checked, onChange }: CheckboxTagProps) {
+export default function CheckboxTag({ value, checked, onChange, disabled }: CheckboxTagProps) {
   function handleChange() {
     onChange(value)
   }
@@ -20,6 +21,7 @@ export default function CheckboxTag({ value, checked, onChange }: CheckboxTagPro
       name={value}
       checked={checked}
       onCheckedChange={handleChange}
+      disabled={disabled}
     >
       {value}
     </Checkbox.Root>

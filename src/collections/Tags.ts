@@ -7,7 +7,7 @@ export const Tags: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title'],
+    defaultColumns: ['title', 'id'],
   },
   fields: [
     {

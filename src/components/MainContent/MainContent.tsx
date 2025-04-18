@@ -3,11 +3,11 @@ import React from 'react'
 import styles from './MainContent.module.css'
 import BookButton from '@/components/BookButton/BookButton'
 import { useViewContext } from '@/contexts/viewProvider'
-import useBookOrder from '@/hooks/useBookOrder'
+import { useBookContext } from '@/contexts/bookProvider'
 
 export default function MainContent() {
   const { view } = useViewContext()
-  const { bookOrder } = useBookOrder()
+  const { books } = useBookContext()
 
   // console.log({ bookOrder })
 
@@ -17,7 +17,7 @@ export default function MainContent() {
     <div className={styles.mainContent}>
       <div className={styles.mainWrapper}>
         <div className={`${styles.booksContainer} ${booksContainerClass}`}>
-          {bookOrder && bookOrder.map((book: Book) => <BookButton key={book.bookId} book={book} />)}
+          {books && books.map((book: Book) => <BookButton key={book.bookId} book={book} />)}
         </div>
       </div>
     </div>

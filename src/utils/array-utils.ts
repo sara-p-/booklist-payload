@@ -73,20 +73,21 @@ export function getTheSeries(books: Book[]) {
  * @returns {Book[]} the filtered book object
  *
  */
-export function filterBooks(books: Book[], author: string, series: string) {
+export function filterBooks(books: Book[], filter: string, value: string) {
   const originalBooks = [...books]
-  // filter books by author or series
-  if (author && author !== 'all') {
-    return originalBooks.filter((book) =>
-      typeof book.author === 'string' ? book.author === author : book.author.name === author,
-    )
+
+  switch (filter) {
+    case 'author':
+      return originalBooks.filter((book) =>
+        typeof book.author === 'string' ? book.author === value : book.author.name === value,
+      )
+    case 'series':
+      return originalBooks.filter((book) =>
+        typeof book.series === 'string' ? book.series === value : book.series.title === value,
+      )
+    default:
+      return originalBooks
   }
-  if (series && series !== 'all') {
-    return originalBooks.filter((book) =>
-      typeof book.series === 'string' ? book.series === series : book.series.title === series,
-    )
-  }
-  return originalBooks
 }
 
 // function to filter the books by the selected tags

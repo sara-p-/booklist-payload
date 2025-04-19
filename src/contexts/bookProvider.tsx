@@ -7,6 +7,7 @@ import { filterBooks } from '@/utils/array-utils'
 import { filterBooksByTags } from '@/utils/array-utils'
 import { sortBooksBy } from '@/utils/array-utils'
 import { useBookSettings } from './bookSettingsProvider'
+import { useBookFiltering } from '@/hooks/useBookFiltering'
 
 interface BookContextType {
   books: Book[]
@@ -19,6 +20,7 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
   const { data } = useGetStuff('books')
   const { bookSettings } = useBookSettings()
   const [books, setBooks] = React.useState<Book[]>([])
+  const { filteredBooks } = useBookFiltering({ settings: bookSettings, books: data?.docs })
   const bookList = data?.docs
 
   function updateBooks(newBooks: Book[]) {
@@ -27,21 +29,13 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     if (bookList !== undefined) {
-      const initialBooks = [...bookList]
-      // filter the books based on the filter value
-      const filteredBooks = filterBooks(initialBooks, bookSettings.author, bookSettings.series)
-      const filteredBooksByTags = filterBooksByTags(filteredBooks, bookSettings.tags)
-      // sort the books based on the sort value
-      const sortedBooks = sortBooksBy(filteredBooksByTags, bookSettings.sort)
-      if (sortedBooks) {
-        if (bookSettings.order !== 'asc') {
-          updateBooks(sortedBooks.reverse().flat())
-        } else {
-          updateBooks(sortedBooks.flat())
-        }
-      }
+      updateBooks(bookList)
     }
-  }, [bookList, bookSettings])
+  }, [bookList])
+
+  React.useEffect(() => {
+    updateBooks(filteredBooks)
+  }, [filteredBooks])
 
   return <BookContext.Provider value={{ books, updateBooks }}>{children}</BookContext.Provider>
 }

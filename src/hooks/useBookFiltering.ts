@@ -1,3 +1,4 @@
+import { useBookContext } from '@/contexts/bookProvider'
 import { Book } from '@/payload-types'
 import { BookSettingsType } from '@/types/types'
 import { filterBooks, filterBooksByTags, sortBooksBy } from '@/utils/array-utils'
@@ -9,6 +10,7 @@ type BookFilter = {
 }
 
 export const useBookFiltering = ({ settings, books }: BookFilter) => {
+  const { books: booksContext } = useBookContext()
   const [filteredBooks, setFilteredBooks] = React.useState<Book[]>(books)
 
   function updateFilteredBooks(books: Book[]) {

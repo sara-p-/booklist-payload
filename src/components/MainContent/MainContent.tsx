@@ -9,7 +9,7 @@ export default function MainContent() {
   const { view } = useViewContext()
   const { books } = useBookContext()
 
-  // console.log({ bookOrder })
+  console.log({ books })
 
   const booksContainerClass = view === 'grid' ? styles.grid : styles.list
 

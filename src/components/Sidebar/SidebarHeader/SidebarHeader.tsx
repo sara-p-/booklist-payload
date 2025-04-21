@@ -12,10 +12,10 @@ import { useViewContext } from '@/contexts/viewProvider'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
 export default function SidebarHeader() {
   const { view, handleViewChange } = useViewContext()
-  const { bookSettings, setBookSettings } = useBookSettings()
+  const { bookSettings, updateBookSettings } = useBookSettings()
 
   function orderChange(checked: boolean) {
-    setBookSettings({ ...bookSettings, order: checked ? 'desc' : 'asc' })
+    updateBookSettings({ ...bookSettings, order: checked ? 'desc' : 'asc' })
   }
 
   function viewChange(checked: boolean) {

@@ -11,19 +11,23 @@ type BookFilter = {
 export const useBookFiltering = ({ settings, books }: BookFilter) => {
   const [filteredBooks, setFilteredBooks] = React.useState<Book[]>(books)
 
+  function updateFilteredBooks(books: Book[]) {
+    setFilteredBooks(books)
+  }
+
   React.useEffect(() => {
     // filter the books based on the filter value
-    setFilteredBooks(filterBooks(books, 'author', settings.author))
-    setFilteredBooks(filterBooks(books, 'series', settings.series))
-    setFilteredBooks(filterBooksByTags(books, settings.tags))
+    updateFilteredBooks(filterBooks(books, 'author', settings.author))
+    updateFilteredBooks(filterBooks(books, 'series', settings.series))
+    updateFilteredBooks(filterBooksByTags(books, settings.tags))
 
     // sort the books based on the sort value
     const sortedBooks = sortBooksBy(books, settings.sort)
     if (sortedBooks) {
       if (settings.order !== 'asc') {
-        setFilteredBooks(sortedBooks.reverse().flat())
+        updateFilteredBooks(sortedBooks.reverse().flat())
       } else {
-        setFilteredBooks(sortedBooks.flat())
+        updateFilteredBooks(sortedBooks.flat())
       }
     }
   }, [settings, books])

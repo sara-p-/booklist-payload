@@ -20,18 +20,21 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
   const { data } = useGetStuff('books')
   const { bookSettings } = useBookSettings()
   const [books, setBooks] = React.useState<Book[]>([])
-  const { filteredBooks } = useBookFiltering({ settings: bookSettings, books: data?.docs })
-  const bookList = data?.docs
+  const filteredBooks = useBookFiltering({ settings: bookSettings, books: data?.docs })
+  // const filteredBooks = useBookFiltering({ settings: bookSettings, books })
 
   function updateBooks(newBooks: Book[]) {
-    setBooks(newBooks)
+    if (newBooks !== undefined) {
+      const newBooksArray = [...newBooks]
+      setBooks(newBooksArray)
+    }
   }
 
   React.useEffect(() => {
-    if (bookList !== undefined) {
-      updateBooks(bookList)
+    if (data !== undefined) {
+      updateBooks(data.docs)
     }
-  }, [bookList])
+  }, [data])
 
   React.useEffect(() => {
     updateBooks(filteredBooks)

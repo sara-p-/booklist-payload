@@ -9,6 +9,10 @@ import { Book, Tag } from '@/payload-types'
  *
  */
 export function sortBooksBy(books: Book[], sortBy: string) {
+  if (!books) {
+    return []
+  }
+
   const originalBooks = [...books]
   switch (sortBy) {
     case 'series':
@@ -74,6 +78,10 @@ export function getTheSeries(books: Book[]) {
  *
  */
 export function filterBooks(books: Book[], filter: string, value: string) {
+  if (!books) {
+    return []
+  }
+
   const originalBooks = [...books]
 
   switch (filter) {
@@ -100,6 +108,10 @@ export function filterBooks(books: Book[], filter: string, value: string) {
  *
  */
 export function filterBooksByTags(books: Book[], tags: string[]) {
+  if (!books) {
+    return []
+  }
+
   const originalBooks = [...books]
   // filter books by the tag array. The returned books should contain all of the tags in the tag array
   if (tags.length > 0) {

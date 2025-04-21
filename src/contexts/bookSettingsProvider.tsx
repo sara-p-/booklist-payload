@@ -4,7 +4,7 @@ import { BookSettingsType } from '@/types/types'
 
 type BookSettingsContextType = {
   bookSettings: BookSettingsType
-  setBookSettings: (bookSettings: BookSettingsType) => void
+  updateBookSettings: (bookSettings: BookSettingsType) => void
 }
 
 const BookSettingsContext = React.createContext<BookSettingsContextType | null>(null)
@@ -19,8 +19,12 @@ export const BookSettingsProvider = ({ children }: { children: React.ReactNode }
     tags: [],
   })
 
+  function updateBookSettings(newBookSettings: BookSettingsType) {
+    setBookSettings(newBookSettings)
+  }
+
   return (
-    <BookSettingsContext.Provider value={{ bookSettings, setBookSettings }}>
+    <BookSettingsContext.Provider value={{ bookSettings, updateBookSettings }}>
       {children}
     </BookSettingsContext.Provider>
   )

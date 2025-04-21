@@ -21,6 +21,7 @@ export default function Sidebar() {
   const { bookSettings } = useBookSettings()
   // Function to set the changes in the book settings based on user input
   const { handleFilterChange } = useHandleFilterChange()
+
   // Create author and series dropdown options
   const { authors, series } = useCreateDropdownOptions()
   // Create tags
@@ -41,7 +42,9 @@ export default function Sidebar() {
             placeholder="Search"
             icon={<FontAwesomeIcon icon={faSearch} style={{ width: '14px' }} />}
             value={bookSettings.search}
-            onChange={(value) => handleFilterChange('search', value)}
+            onChange={(value) => {
+              handleFilterChange('search', value)
+            }}
           />
         </Fieldset>
         <Fieldset title="sort">

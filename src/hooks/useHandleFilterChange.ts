@@ -7,8 +7,8 @@ import { useBookFiltering } from './useBookFiltering'
 export function useHandleFilterChange() {
   const { bookSettings, updateBookSettings } = useBookSettings()
   const { books, updateBooks } = useBookContext()
-  const filteredBooks = useBookFiltering({ settings: bookSettings, books: books })
-  const newBooks = [...filteredBooks]
+  // const filteredBooks = useBookFiltering({ settings: bookSettings, books: books })
+  const newBooks = [...books]
   const newBookSettings = { ...bookSettings }
 
   function handleFilterChange(filter: string, value: string) {
@@ -24,7 +24,10 @@ export function useHandleFilterChange() {
       }
     } else {
       updateBookSettings({ ...newBookSettings, [filter]: value })
-      // updateBooks(filterBooks(newBooks, filter, value))
+      const newFilteredBooks = filterBooks(newBooks, filter, value)
+      console.log('newFilteredBooks', newFilteredBooks)
+      // console.log('newSettings', newBookSettings)
+      // updateBooks(newFilteredBooks)
     }
   }
 

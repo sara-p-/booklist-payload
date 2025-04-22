@@ -86,13 +86,21 @@ export function filterBooks(books: Book[], filter: string, value: string) {
 
   switch (filter) {
     case 'author':
-      return originalBooks.filter((book) =>
-        typeof book.author === 'string' ? book.author === value : book.author.name === value,
-      )
+      if (value === 'all') {
+        return originalBooks
+      } else {
+        return originalBooks.filter((book) =>
+          typeof book.author === 'string' ? book.author === value : book.author.name === value,
+        )
+      }
     case 'series':
-      return originalBooks.filter((book) =>
-        typeof book.series === 'string' ? book.series === value : book.series.title === value,
-      )
+      if (value === 'all') {
+        return originalBooks
+      } else {
+        return originalBooks.filter((book) =>
+          typeof book.series === 'string' ? book.series === value : book.series.title === value,
+        )
+      }
     default:
       return originalBooks
   }

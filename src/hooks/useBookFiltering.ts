@@ -10,11 +10,11 @@ type BookFilter = {
 }
 
 export const useBookFiltering = ({ settings, books }: BookFilter) => {
-  const { books: booksContext } = useBookContext()
   const [filteredBooks, setFilteredBooks] = React.useState<Book[]>(books)
 
   function updateFilteredBooks(books: Book[]) {
-    setFilteredBooks(books)
+    const newFilteredBooks = [...books]
+    setFilteredBooks(newFilteredBooks)
   }
 
   React.useEffect(() => {

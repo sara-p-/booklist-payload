@@ -4,12 +4,13 @@ import styles from './MainContent.module.css'
 import BookButton from '@/components/BookButton/BookButton'
 import { useViewContext } from '@/contexts/viewProvider'
 import { useBookContext } from '@/contexts/bookProvider'
-
+import { useBookSettings } from '@/contexts/bookSettingsProvider'
 export default function MainContent() {
   const { view } = useViewContext()
   const { books } = useBookContext()
+  const { bookSettings } = useBookSettings()
 
-  console.log({ books })
+  // console.log('books', books)
 
   const booksContainerClass = view === 'grid' ? styles.grid : styles.list
 

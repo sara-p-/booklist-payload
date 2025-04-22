@@ -18,15 +18,16 @@ export const BookContext = React.createContext<BookContextType | null>(null)
 
 export const BookProvider = ({ children }: { children: React.ReactNode }) => {
   const { data } = useGetStuff('books')
-  const { bookSettings } = useBookSettings()
+  // const { bookSettings } = useBookSettings()
   const [books, setBooks] = React.useState<Book[]>([])
-  const filteredBooks = useBookFiltering({ settings: bookSettings, books: data?.docs })
+  // const filteredBooks = useBookFiltering({ settings: bookSettings, books: data?.docs })
   // const filteredBooks = useBookFiltering({ settings: bookSettings, books })
 
   function updateBooks(newBooks: Book[]) {
     if (newBooks !== undefined) {
       const newBooksArray = [...newBooks]
       setBooks(newBooksArray)
+      // console.log('newBooksArray', newBooksArray)
     }
   }
 
@@ -36,9 +37,9 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [data])
 
-  React.useEffect(() => {
-    updateBooks(filteredBooks)
-  }, [filteredBooks])
+  // React.useEffect(() => {
+  //   updateBooks(filteredBooks)
+  // }, [filteredBooks])
 
   return <BookContext.Provider value={{ books, updateBooks }}>{children}</BookContext.Provider>
 }

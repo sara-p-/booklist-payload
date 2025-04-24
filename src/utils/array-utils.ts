@@ -1,4 +1,4 @@
-import { Book, Tag } from '@/payload-types'
+import { Book } from '@/payload-types'
 import { BookSettingsType } from '@/types/types'
 
 /**

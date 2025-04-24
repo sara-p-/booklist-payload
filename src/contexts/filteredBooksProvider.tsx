@@ -2,14 +2,9 @@
 
 import React from 'react'
 import { Book } from '@/payload-types'
-import useGetStuff from '@/hooks/useGetStuff'
-import { filterBooks, filterBooksBySettings } from '@/utils/array-utils'
-import { filterBooksByTags } from '@/utils/array-utils'
-import { sortBooksBy } from '@/utils/array-utils'
+import { filterBooksBySettings } from '@/utils/array-utils'
 import { useBookSettings } from './bookSettingsProvider'
-import { useBookFiltering } from '@/hooks/useBookFiltering'
-import { useBookFilteringAgain } from '@/hooks/useBookFilteringAgain'
-import { BookContext, useBookContext } from './bookProvider'
+import { useBookContext } from './bookProvider'
 
 interface BookContextType {
   filteredBooks: Book[]

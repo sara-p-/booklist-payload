@@ -17,8 +17,6 @@ export const FilteredBookProvider = ({ children }: { children: React.ReactNode }
   const { bookSettings } = useBookSettings()
   const { books } = useBookContext()
   const [filteredBooks, setFilteredBooks] = React.useState<Book[]>(books)
-  // const { updateFilteredBooks } = useBookFilteringAgain({ settings: bookSettings, books })
-  // const filteredBooks = useBookFiltering({ settings: bookSettings, books })
 
   function updateFilteredBooks(newFilteredBooks: Book[]) {
     if (newFilteredBooks !== undefined) {

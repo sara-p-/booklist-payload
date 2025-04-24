@@ -1,13 +1,13 @@
 import { Book } from '@/payload-types'
-import { useBookContext } from '@/contexts/bookProvider'
+import { useFilteredBookContext } from '@/contexts/filteredBooksProvider'
 
 export default function useCreateDropdownOptions() {
   // Get the current books
-  const { books } = useBookContext()
+  const { filteredBooks } = useFilteredBookContext()
 
   // Get the authors and series from the current books
   const authors =
-    books?.map((book: Book) => ({
+    filteredBooks?.map((book: Book) => ({
       name: typeof book.author === 'string' ? book.author : book.author.name,
       id: typeof book.author === 'string' ? book.author : book.author.id,
     })) || []
@@ -19,7 +19,7 @@ export default function useCreateDropdownOptions() {
 
   // Get the series from the current books
   const series =
-    books?.map((book: Book) => ({
+    filteredBooks?.map((book: Book) => ({
       name: typeof book.series === 'string' ? book.series : book.series.title,
       id: typeof book.series === 'string' ? book.series : book.series.id,
     })) || []
@@ -30,7 +30,11 @@ export default function useCreateDropdownOptions() {
   )
 
   return {
-    authors: uniqueAuthors,
-    series: uniqueSeries,
+    authors: uniqueAuthors.sort((a: { name: string }, b: { name: string }) =>
+      a.name.localeCompare(b.name),
+    ),
+    series: uniqueSeries.sort((a: { name: string }, b: { name: string }) =>
+      a.name.localeCompare(b.name),
+    ),
   }
 }

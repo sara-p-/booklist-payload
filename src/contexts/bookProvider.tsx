@@ -19,7 +19,6 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
     if (newBooks !== undefined) {
       const newBooksArray = [...newBooks]
       setBooks(newBooksArray)
-      // console.log('newBooksArray', newBooksArray)
     }
   }
 
@@ -28,17 +27,6 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
       updateBooks(data.docs)
     }
   }, [data])
-
-  // React.useEffect(() => {
-  //   updateBooks(filteredBooks)
-  // }, [filteredBooks])
-
-  // // update the books whenever the bookSettings change
-  // React.useEffect(() => {
-  //   updateBooks(filteredBooks)
-  // }, [bookSettings, filteredBooks])
-
-  // console.log('filteredBooks', filteredBooks)
 
   return <BookContext.Provider value={{ books, updateBooks }}>{children}</BookContext.Provider>
 }

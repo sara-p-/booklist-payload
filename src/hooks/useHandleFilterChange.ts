@@ -3,10 +3,15 @@ import { useBookSettings } from '@/contexts/bookSettingsProvider'
 import { useBookContext } from '@/contexts/bookProvider'
 import { filterBooks } from '@/utils/array-utils'
 import { useBookFiltering } from './useBookFiltering'
+import { useBookFilteringAgain } from './useBookFilteringAgain'
 
 export function useHandleFilterChange() {
   const { bookSettings, updateBookSettings } = useBookSettings()
   const { books, updateBooks } = useBookContext()
+  const { filteredBooks, updateFilteredBooks } = useBookFilteringAgain({
+    settings: bookSettings,
+    books: books,
+  })
   // const filteredBooks = useBookFiltering({ settings: bookSettings, books: books })
   const newBooks = [...books]
   const newBookSettings = { ...bookSettings }

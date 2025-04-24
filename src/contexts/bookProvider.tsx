@@ -3,11 +3,6 @@
 import React from 'react'
 import { Book } from '@/payload-types'
 import useGetStuff from '@/hooks/useGetStuff'
-import { filterBooks } from '@/utils/array-utils'
-import { filterBooksByTags } from '@/utils/array-utils'
-import { sortBooksBy } from '@/utils/array-utils'
-import { useBookSettings } from './bookSettingsProvider'
-import { useBookFiltering } from '@/hooks/useBookFiltering'
 
 interface BookContextType {
   books: Book[]
@@ -18,10 +13,7 @@ export const BookContext = React.createContext<BookContextType | null>(null)
 
 export const BookProvider = ({ children }: { children: React.ReactNode }) => {
   const { data } = useGetStuff('books')
-  // const { bookSettings } = useBookSettings()
   const [books, setBooks] = React.useState<Book[]>([])
-  // const filteredBooks = useBookFiltering({ settings: bookSettings, books: data?.docs })
-  // const filteredBooks = useBookFiltering({ settings: bookSettings, books })
 
   function updateBooks(newBooks: Book[]) {
     if (newBooks !== undefined) {
@@ -40,6 +32,13 @@ export const BookProvider = ({ children }: { children: React.ReactNode }) => {
   // React.useEffect(() => {
   //   updateBooks(filteredBooks)
   // }, [filteredBooks])
+
+  // // update the books whenever the bookSettings change
+  // React.useEffect(() => {
+  //   updateBooks(filteredBooks)
+  // }, [bookSettings, filteredBooks])
+
+  // console.log('filteredBooks', filteredBooks)
 
   return <BookContext.Provider value={{ books, updateBooks }}>{children}</BookContext.Provider>
 }

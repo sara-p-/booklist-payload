@@ -6,6 +6,7 @@ import { BookProvider } from '@/contexts/bookProvider'
 import { BookSettingsProvider } from '@/contexts/bookSettingsProvider'
 import { ViewProvider } from '@/contexts/viewProvider'
 import { ThemeProvider } from '@/contexts/themeProvider'
+import { FilteredBookProvider } from '@/contexts/filteredBooksProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,10 +24,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <ViewProvider>
           <BookSettingsProvider>
             <BookProvider>
-              <body>
-                <Header />
-                <main>{children}</main>
-              </body>
+              <FilteredBookProvider>
+                <body>
+                  <Header />
+                  <main>{children}</main>
+                </body>
+              </FilteredBookProvider>
             </BookProvider>
           </BookSettingsProvider>
         </ViewProvider>

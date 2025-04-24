@@ -1,4 +1,5 @@
 import { Book, Tag } from '@/payload-types'
+import { BookSettingsType } from '@/types/types'
 
 /**
  * Accepts the book object and the sort order and returns the sorted book object
@@ -129,4 +130,31 @@ export function filterBooksByTags(books: Book[], tags: string[]) {
     })
   }
   return originalBooks
+}
+
+/**
+ * Accepts the book object and the settings object and returns a new array based on the filter parameters
+ *
+ * @param {Book[]} books - the book object
+ * @param {BookSettingsType} settings - the settings object
+ * @returns {Book[]} the filtered book object
+ *
+ */
+export function filterBooksBySettings(books: Book[], settings: BookSettingsType) {
+  // filter the books based on the filter value
+  let newFilteredBooks = [...books]
+  newFilteredBooks = filterBooks(newFilteredBooks, 'author', settings.author)
+  newFilteredBooks = filterBooks(newFilteredBooks, 'series', settings.series)
+  newFilteredBooks = filterBooksByTags(newFilteredBooks, settings.tags)
+
+  // sort the books based on the sort value
+  const sortedBooks = sortBooksBy(newFilteredBooks, settings.sort)
+  if (sortedBooks) {
+    if (settings.order !== 'asc') {
+      newFilteredBooks = sortedBooks.reverse().flat()
+    } else {
+      newFilteredBooks = sortedBooks.flat()
+    }
+  }
+  return newFilteredBooks
 }

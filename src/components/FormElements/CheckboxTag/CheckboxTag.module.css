@@ -11,9 +11,10 @@
   cursor: pointer;
   text-transform: lowercase;
   &[data-state='checked'] {
-    background-color: var(--primary);
+    background-color: var(--set);
     color: var(--secondary);
   }
+
   &:hover {
     background-color: var(--primary);
     color: var(--secondary);

@@ -26,9 +26,9 @@
   --primary: var(--black);
   --secondary: var(--white);
   --active: var(--medium-grey);
-  --hover: var(--light-grey);
-  --set: var(--primary);
-  --accent: var(--blue);
+  --hover: var(--dark-grey);
+  --set: var(--dark-grey);
+  --accent: var(--primary);
 
   /* Borders */
   --border-thick: 7px solid var(--primary);
@@ -124,7 +124,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--hover);
 }
 
 .button {

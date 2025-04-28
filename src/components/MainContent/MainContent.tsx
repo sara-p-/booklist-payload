@@ -6,10 +6,10 @@ import { useViewContext } from '@/contexts/viewProvider'
 import { useFilteredBookContext } from '@/contexts/filteredBooksProvider'
 
 export default function MainContent() {
-  const { view } = useViewContext()
+  const { listView } = useViewContext()
   const { filteredBooks } = useFilteredBookContext()
 
-  const booksContainerClass = view === 'grid' ? styles.grid : styles.list
+  const booksContainerClass = listView ? styles.listView : styles.gridView
 
   return (
     <div className={styles.mainContent}>

@@ -1,20 +1,24 @@
 'use client'
 import React from 'react'
 type ViewContextType = {
-  view: 'grid' | 'list'
-  handleViewChange: (view: 'grid' | 'list') => void
+  listView: boolean
+  handleViewChange: (listView: boolean) => void
 }
 
 export const ViewContext = React.createContext<ViewContextType | null>(null)
 
 export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
-  const [view, setView] = React.useState<'grid' | 'list'>('grid')
+  const [listView, setListView] = React.useState(false)
 
-  function handleViewChange(view: 'grid' | 'list') {
-    setView(view)
+  function handleViewChange(listView: boolean) {
+    setListView(!listView)
   }
 
-  return <ViewContext.Provider value={{ view, handleViewChange }}>{children}</ViewContext.Provider>
+  console.log('listView:', listView)
+
+  return (
+    <ViewContext.Provider value={{ listView, handleViewChange }}>{children}</ViewContext.Provider>
+  )
 }
 
 export function useViewContext() {

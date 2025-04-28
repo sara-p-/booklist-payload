@@ -10,31 +10,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import { useViewContext } from '@/contexts/viewProvider'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
+import { useFilteredBookContext } from '@/contexts/filteredBooksProvider'
+
 export default function SidebarHeader() {
-  const { view, handleViewChange } = useViewContext()
+  const { listView, handleViewChange } = useViewContext()
   const { bookSettings, updateBookSettings } = useBookSettings()
+  const { filteredBooks } = useFilteredBookContext()
 
   function orderChange(checked: boolean) {
     updateBookSettings({ ...bookSettings, order: checked ? 'desc' : 'asc' })
   }
 
-  function viewChange(checked: boolean) {
-    handleViewChange(checked ? 'list' : 'grid')
+  function viewChange(listView: boolean) {
+    handleViewChange(listView)
   }
 
   return (
     <div className={styles.sidebarHeader}>
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>51 books</h2>
+        <h2 className={styles.title}>{filteredBooks.length} books</h2>
         <div className={styles.actions}>
           <Checkbox.Root
             className={styles.actionCheckbox}
-            value={view}
+            value={listView ? 'list' : 'grid'}
             name="view"
-            checked={view === 'list'}
+            checked={!listView}
             onCheckedChange={viewChange}
           >
-            {view === 'list' ? (
+            {listView ? (
               <FontAwesomeIcon icon={faTableCells} style={{ width: '24px', height: 'auto' }} />
             ) : (
               <FontAwesomeIcon icon={faList} style={{ width: '24px', height: 'auto' }} />
@@ -53,9 +56,6 @@ export default function SidebarHeader() {
               <FontAwesomeIcon icon={faSortAlphaDown} style={{ width: '24px', height: 'auto' }} />
             )}
           </Checkbox.Root>
-          {/* <button>
-            <FontAwesomeIcon icon={faSortAlphaDown} style={{ width: '24px', height: 'auto' }} />
-          </button> */}
         </div>
       </div>
     </div>

@@ -133,6 +133,37 @@ export function filterBooksByTags(books: Book[], tags: string[]) {
 }
 
 /**
+ * Accepts the book object and the search string and returns a new array based on the search parameters
+ *
+ * @param {Book[]} books - the book object
+ * @param {string} search - the search string
+ * @returns {Book[]} the filtered book object
+ *
+ */
+export function filterBooksBySearch(books: Book[], search: string) {
+  if (!books) {
+    return []
+  }
+  if (search === '') {
+    return books
+  }
+
+  // Search the books by title, author, and series
+  return books.filter((book) => {
+    const bookTitle = book.title.toLowerCase()
+    const bookAuthor =
+      typeof book.author === 'string' ? book.author.toLowerCase() : book.author.name.toLowerCase()
+    const bookSeries =
+      typeof book.series === 'string' ? book.series.toLowerCase() : book.series.title.toLowerCase()
+    return (
+      bookTitle.includes(search.toLowerCase()) ||
+      bookAuthor.includes(search.toLowerCase()) ||
+      bookSeries.includes(search.toLowerCase())
+    )
+  })
+}
+
+/**
  * Accepts the book object and the settings object and returns a new array based on the filter parameters
  *
  * @param {Book[]} books - the book object
@@ -146,7 +177,7 @@ export function filterBooksBySettings(books: Book[], settings: BookSettingsType)
   newFilteredBooks = filterBooks(newFilteredBooks, 'author', settings.author)
   newFilteredBooks = filterBooks(newFilteredBooks, 'series', settings.series)
   newFilteredBooks = filterBooksByTags(newFilteredBooks, settings.tags)
-
+  newFilteredBooks = filterBooksBySearch(newFilteredBooks, settings.search)
   // sort the books based on the sort value
   const sortedBooks = sortBooksBy(newFilteredBooks, settings.sort)
   if (sortedBooks) {

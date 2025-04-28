@@ -11,7 +11,14 @@ export default function createBookVars(book: Book) {
   const author = typeof book.author !== 'string' ? book.author?.name || '' : ''
   const series = typeof book.series !== 'string' ? book.series.title || '' : ''
   const bookNumber = typeof book.bookNumber !== 'string' ? book.bookNumber || '' : ''
-  const published = typeof book.published !== 'string' ? book.published || '' : ''
+  const publishedDate = typeof book.published === 'string' ? new Date(book.published) : ''
+  const published = publishedDate
+    ? publishedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        // month: 'long',
+        // day: 'numeric',
+      })
+    : ''
   const description = typeof book.description !== 'string' ? book.description || '' : ''
   const rating = typeof book.rating !== 'string' ? book.rating || '' : ''
 

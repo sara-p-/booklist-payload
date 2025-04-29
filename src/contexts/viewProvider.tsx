@@ -14,8 +14,6 @@ export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
     setListView(!listView)
   }
 
-  console.log('listView:', listView)
-
   return (
     <ViewContext.Provider value={{ listView, handleViewChange }}>{children}</ViewContext.Provider>
   )

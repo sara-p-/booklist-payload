@@ -1,5 +1,5 @@
 import { Book } from '@/payload-types'
-import { BookSettingsType } from '@/types/types'
+import { BookSettingsType, BookWithSeriesTitle } from '@/types/types'
 
 /**
  * Accepts the book object and the sort order and returns the sorted book object
@@ -188,4 +188,44 @@ export function filterBooksBySettings(books: Book[], settings: BookSettingsType)
     }
   }
   return newFilteredBooks
+}
+
+/**
+ * Accepts the filtered books, pulls out an array of series, and then returns a new array with the series titles placed at the beginning of each series in the array
+ *
+ * @param {Book[]} books - the book object
+ * @returns {Book[]} the filtered book object
+ *
+ */
+export function addSeriesToBooks(books: Book[]) {
+  if (!books) {
+    return []
+  }
+
+  // Loop through the book array. Find the first instance of each series title in the book array, and inject a new object before it with the series title.
+  const allSeries = getTheSeries(books)
+
+  const newSeriesArray = allSeries.map((series) => {
+    const bookIndex = books.findIndex((book) =>
+      typeof book.series === 'string' ? book.series === series : book.series.title === series,
+    )
+    return {
+      series,
+      bookIndex,
+    }
+  })
+
+  const newArray = books.map((book, index) => {
+    const seriesIndex = newSeriesArray.findIndex((series) => series.bookIndex === index)
+    if (seriesIndex !== -1) {
+      const newBook: BookWithSeriesTitle = {
+        ...book,
+        seriesTitle: newSeriesArray[seriesIndex].series,
+      }
+      return newBook
+    }
+    return book
+  })
+
+  return newArray
 }

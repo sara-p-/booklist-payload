@@ -1,3 +1,5 @@
+import { Book } from '@/payload-types'
+
 export type BookSettingsType = {
   order: 'asc' | 'desc'
   search: string
@@ -8,3 +10,7 @@ export type BookSettingsType = {
 }
 
 export type SortType = 'series' | 'title' | 'rating' | 'published' | 'length'
+
+export interface BookWithSeriesTitle extends Book {
+  seriesTitle: string
+}

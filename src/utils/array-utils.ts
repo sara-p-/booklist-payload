@@ -1,5 +1,5 @@
 import { Book } from '@/payload-types'
-import { BookSettingsType, BookWithSeriesTitle } from '@/types/types'
+import { BookSettingsType, BookWithExtrasType } from '@/types/types'
 
 /**
  * Accepts the book object and the sort order and returns the sorted book object
@@ -218,7 +218,7 @@ export function addSeriesToBooks(books: Book[]) {
   const newArray = books.map((book, index) => {
     const seriesIndex = newSeriesArray.findIndex((series) => series.bookIndex === index)
     if (seriesIndex !== -1) {
-      const newBook: BookWithSeriesTitle = {
+      const newBook: BookWithExtrasType = {
         ...book,
         seriesTitle: newSeriesArray[seriesIndex].series,
       }

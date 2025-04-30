@@ -11,6 +11,6 @@ export type BookSettingsType = {
 
 export type SortType = 'series' | 'title' | 'rating' | 'published' | 'length'
 
-export interface BookWithSeriesTitle extends Book {
-  seriesTitle: string
+export interface BookWithExtrasType extends Book {
+  seriesTitle?: string
 }

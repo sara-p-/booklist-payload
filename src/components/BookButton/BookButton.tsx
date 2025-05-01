@@ -4,18 +4,22 @@ import { Book as BookType } from '@/payload-types'
 import Image from 'next/image'
 import bookVars from '@/hooks/bookVars'
 import { useViewContext } from '@/contexts/viewProvider'
+import { BookWithExtrasType } from '@/types/types'
+import Link from 'next/link'
+
 type BookProps = {
-  book: BookType
+  book: BookWithExtrasType
+  seriesTitle?: string
 }
 
-export default function BookButton({ book }: BookProps) {
+export default function BookButton({ book, seriesTitle }: BookProps) {
   const { listView } = useViewContext()
   const { imageSrc, imageAlt, author, series, bookNumber, published, rating } = bookVars(book)
 
   const bookStyle = listView ? `${styles.bookButton} ${styles.listView}` : styles.bookButton
 
   return (
-    <button className={bookStyle}>
+    <Link href={`/book/${book.title}`} className={bookStyle}>
       <div className={styles.bookImage}>
         <Image src={imageSrc} alt={imageAlt} width={200} height={300} />
       </div>
@@ -39,6 +43,6 @@ export default function BookButton({ book }: BookProps) {
           </div>
         </>
       )}
-    </button>
+    </Link>
   )
 }

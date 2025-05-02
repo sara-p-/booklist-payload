@@ -6,6 +6,7 @@ import bookVars from '@/hooks/bookVars'
 import { useViewContext } from '@/contexts/viewProvider'
 import { BookWithExtrasType } from '@/types/types'
 import Link from 'next/link'
+import { slugify } from '@/utils/helpers'
 
 type BookProps = {
   book: BookWithExtrasType
@@ -18,8 +19,10 @@ export default function BookButton({ book, seriesTitle }: BookProps) {
 
   const bookStyle = listView ? `${styles.bookButton} ${styles.listView}` : styles.bookButton
 
+  const bookSlug = slugify(book.title)
+
   return (
-    <Link href={`/book/${book.title}`} className={bookStyle}>
+    <Link href={`/book/${bookSlug}`} className={bookStyle}>
       <div className={styles.bookImage}>
         <Image src={imageSrc} alt={imageAlt} width={200} height={300} />
       </div>

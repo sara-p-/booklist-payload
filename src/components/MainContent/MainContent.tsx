@@ -3,7 +3,6 @@ import { useViewContext } from '@/contexts/viewProvider'
 import { useFilteredBookContext } from '@/contexts/filteredBooksProvider'
 import { addSeriesToBooks } from '@/utils/array-utils'
 import useBookList from '@/hooks/useBookList'
-import BookButton from '../BookButton/BookButton'
 
 export default function MainContent() {
   const { listView } = useViewContext()

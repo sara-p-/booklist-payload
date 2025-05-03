@@ -1,13 +1,13 @@
 'use client'
 import './styles.css'
-import Sidebar from '@/components/Sidebar/Sidebar'
-import MainContent from '@/components/MainContent/MainContent'
+import BookListSidebar from '@/components/Sidebar/BookListSidebar'
+import MainBookListContent from '@/components/MainContent/MainBookListContent'
 
 export default function HomePage() {
   return (
     <div className="home">
-      <Sidebar />
-      <MainContent />
+      <BookListSidebar />
+      <MainBookListContent />
     </div>
   )
 }

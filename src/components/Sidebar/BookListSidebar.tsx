@@ -6,7 +6,7 @@ import Fieldset from '@/components/FormElements/Fieldset/Fieldset'
 import SearchInput from '@/components/FormElements/SearchInput/SearchInput'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import SidebarHeader from './SidebarHeader/SidebarHeader'
+import BookListSidebarHeader from './SidebarHeader/BookListSidebarHeader'
 import SelectField from '@/components/FormElements/SelectField/SelectField'
 import TagsBox from './TagsBox/TagsBox'
 import CheckboxTag from '@/components/FormElements/CheckboxTag/CheckboxTag'
@@ -16,7 +16,7 @@ import useCreateTags from '@/hooks/useCreateTags'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
 import { useHandleFilterChange } from '@/hooks/useHandleFilterChange'
 
-export default function Sidebar() {
+export default function BookListSidebar() {
   // Get settings from the 2 different providers
   const { bookSettings } = useBookSettings()
   // Function to set the changes in the book settings based on user input
@@ -35,7 +35,7 @@ export default function Sidebar() {
   return (
     <form onSubmit={handleSubmit} className={styles.sidebar}>
       <div className={styles.wrapper}>
-        <SidebarHeader />
+        <BookListSidebarHeader />
         <Fieldset title="search">
           <SearchInput
             label="Search"

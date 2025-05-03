@@ -1,4 +1,4 @@
-import BookButton from '@/components/BookButton/BookButton'
+import BookButton from '@/components/Book/BookButton'
 import { useBookSettings } from '@/contexts/bookSettingsProvider'
 import { BookWithExtrasType } from '@/types/types'
 import styles from '@/components/MainContent/MainContent.module.css'

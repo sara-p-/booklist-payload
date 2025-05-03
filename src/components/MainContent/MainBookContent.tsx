@@ -1,5 +1,6 @@
 'use client'
 
+import BookPage from '@/components/Book/BookPage'
 import styles from './MainContent.module.css'
 import { useBookContext } from '@/contexts/bookProvider'
 import { slugify } from '@/utils/helpers'
@@ -16,13 +17,7 @@ export default function MainBookContent({ bookTitle }: BookPageContentProps) {
     <div className={styles.mainContent}>
       <div className={styles.mainWrapper}>
         <div className={styles.booksContainer}>
-          {!book ? (
-            <div>Book not found</div>
-          ) : (
-            <div>
-              <h1>{book.title}</h1>
-            </div>
-          )}
+          {!book ? <div>Book not found</div> : <BookPage book={book} />}
         </div>
       </div>
     </div>

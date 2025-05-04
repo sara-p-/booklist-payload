@@ -30,22 +30,30 @@ export default function BookPage({ book }: BookPageProps) {
         </div>
         <div className={styles.bookInfo}>
           <h1 className={styles.bookTitle}>{title}</h1>
-          <p className={styles.bookAuthor}>{author}</p>
+          <h2 className={styles.bookAuthor}>{author}</h2>
           <p className={styles.bookSeries}>{series}</p>
-          <p className={styles.bookNumber}>{bookNumber}</p>
-          <p className={styles.bookPublished}>{published}</p>
-          <p className={styles.bookRating}>{rating}</p>
-        </div>
-        <div className={styles.bookTags}>
-          <p>
-            tags:{' '}
-            {typeof tags === 'string'
-              ? tags
-              : tags.map((tag) => {
-                  return <span key={tag.id}>{tag.title}</span>
-                })}
+          <p className={styles.bookNumber}>
+            <strong>book number:</strong> {bookNumber}
+          </p>
+          <p className={styles.bookPublished}>
+            <strong>published:</strong> {published}
+          </p>
+          <p className={styles.bookRating}>
+            <strong>rating:</strong> {rating}/10
           </p>
         </div>
+      </div>
+      <div className={styles.bookTags}>
+        <p>
+          tags:{' '}
+          {typeof tags === 'string'
+            ? tags
+            : tags.map((tag) => {
+                const tagId = typeof tag === 'string' ? tag : tag.id
+                const tagTitle = typeof tag === 'string' ? tag : tag.title
+                return <span key={tagId}>{tagTitle}, </span>
+              })}
+        </p>
       </div>
     </div>
   )

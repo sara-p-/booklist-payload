@@ -8,7 +8,7 @@ export default function createBookVars(book: Book) {
       : ''
   const imageAlt = typeof book.image !== 'string' ? book.image?.alt || '' : ''
   // Book Info
-  const title = typeof book.title !== 'string' ? book.title || '' : ''
+  const title = typeof book.title === 'string' ? book.title : ''
   const author = typeof book.author !== 'string' ? book.author?.name || '' : ''
   const series = typeof book.series !== 'string' ? book.series.title || '' : ''
   const bookNumber = typeof book.bookNumber !== 'string' ? book.bookNumber || '' : ''

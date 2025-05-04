@@ -1,0 +1,19 @@
+.bookPage {
+  width: 100%;
+  max-width: 1000px;
+  padding: var(--main-spacing);
+}
+
+.bookContent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--main-spacing);
+  width: 100%;
+}
+
+/* .bookImage {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+} */

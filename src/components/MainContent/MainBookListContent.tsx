@@ -1,10 +1,12 @@
+'use client'
+
 import styles from './MainContent.module.css'
 import { useViewContext } from '@/contexts/viewProvider'
 import { useFilteredBookContext } from '@/contexts/filteredBooksProvider'
 import { addSeriesToBooks } from '@/utils/array-utils'
 import useBookList from '@/hooks/useBookList'
 
-export default function MainContent() {
+export default function MainBookListContent() {
   const { listView } = useViewContext()
   const { filteredBooks } = useFilteredBookContext()
   const booksWithSeries = addSeriesToBooks(filteredBooks)

@@ -17,7 +17,7 @@ export default function MainBookContent({ bookTitle }: BookPageContentProps) {
     <div className={styles.mainContent}>
       <div className={styles.mainWrapper}>
         <div className={styles.booksContainer}>
-          {!book ? <div>Book not found</div> : <BookPage book={book} />}
+          {!book ? <div>Loading...</div> : <BookPage book={book} />}
         </div>
       </div>
     </div>

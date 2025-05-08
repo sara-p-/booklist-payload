@@ -29,30 +29,39 @@ export default function BookPage({ book }: BookPageProps) {
           <Image src={imageSrc} alt={imageAlt} width={200} height={300} />
         </div>
         <div className={styles.bookInfo}>
-          <h1 className={styles.bookTitle}>{title}</h1>
-          <h2 className={styles.bookAuthor}>{author}</h2>
-          <p className={styles.bookSeries}>{series}</p>
-          <p className={styles.bookNumber}>
-            <strong>book number:</strong> {bookNumber}
+          <h1 className={`${styles.bookTitle}`}>{title}</h1>
+          <h2 className={`${styles.bookAuthor}`}>{author}</h2>
+          <p className={`${styles.bookSeries} ${styles.bookItems}`}>
+            <strong>series:</strong> {series}
           </p>
-          <p className={styles.bookPublished}>
+          <p className={`${styles.bookNumber} ${styles.bookItems}`}>
+            <strong>book #:</strong> {bookNumber}
+          </p>
+          <p className={`${styles.bookPublished} ${styles.bookItems}`}>
             <strong>published:</strong> {published}
           </p>
-          <p className={styles.bookRating}>
+          <p className={`${styles.bookRating} ${styles.bookItems}`}>
             <strong>rating:</strong> {rating}/10
           </p>
         </div>
       </div>
-      <div className={styles.bookTags}>
-        <p>
-          tags:{' '}
-          {typeof tags === 'string'
-            ? tags
-            : tags.map((tag) => {
-                const tagId = typeof tag === 'string' ? tag : tag.id
-                const tagTitle = typeof tag === 'string' ? tag : tag.title
-                return <span key={tagId}>{tagTitle}, </span>
-              })}
+      <div className={styles.bookTagsSection}>
+        <p className={`${styles.bookTags} ${styles.bookItems}`}>
+          <span className={styles.bookTagsLabel}>
+            <strong>tags: </strong>
+          </span>
+          <span className={styles.bookTagsList}>
+            {typeof tags === 'string'
+              ? tags
+              : tags.map((tag, index) => {
+                  const tagId = typeof tag === 'string' ? tag : tag.id
+                  const tagTitle = typeof tag === 'string' ? tag : tag.title
+                  if (index === tags.length - 1) {
+                    return <span key={tagId}>{tagTitle}</span>
+                  }
+                  return <span key={tagId}>{tagTitle}, </span>
+                })}
+          </span>
         </p>
       </div>
     </div>

@@ -12,6 +12,7 @@
 
   box-sizing: border-box;
   --main-spacing: 16px;
+  --aspect-ratio: 3/4.3;
 
   /* Colors */
   --black: #242424;
@@ -52,7 +53,8 @@
 }
 
 html,
-body {
+body,
+main {
   height: 100%;
   min-height: 100%;
   width: 100%;

@@ -24,6 +24,10 @@
   font-weight: 600;
 }
 
+.bookTagsSection {
+  margin-bottom: 2rem;
+}
+
 .bookTags {
   display: flex;
   flex-wrap: no-wrap;
@@ -42,4 +46,13 @@
   width: 1px;
   height: 0;
   padding-bottom: calc(100% / (var(--aspect-ratio)));
+}
+
+.descriptionBlock {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.description {
+  width: 100%;
 }

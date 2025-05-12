@@ -21,10 +21,10 @@ export default function createBookVars(book: Book) {
       })
     : ''
   const length = typeof book.length !== 'string' ? book.length || '' : ''
-  const description = typeof book.description !== 'string' ? book.description || '' : ''
+  const description = typeof book.description !== 'string' ? book.description || null : null
   const rating = typeof book.rating !== 'string' ? book.rating || '' : ''
   const tags = typeof book.tags !== 'string' ? book.tags || '' : ''
-  const notes = typeof book.notes !== 'string' ? book.notes || '' : ''
+  const notes = typeof book.notes !== 'string' ? book.notes || null : null
 
   return {
     imageSrc,

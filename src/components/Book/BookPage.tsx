@@ -2,6 +2,7 @@ import { Book } from '@/payload-types'
 import styles from './BookPage.module.css'
 import bookVars from '@/hooks/bookVars'
 import Image from 'next/image'
+import DescriptionBlock from './DescriptionBlock'
 
 interface BookPageProps {
   book: Book
@@ -46,10 +47,8 @@ export default function BookPage({ book }: BookPageProps) {
         </div>
       </div>
       <div className={styles.bookTagsSection}>
+        <h3 className={styles.bookTagsTitle}>tags:</h3>
         <p className={`${styles.bookTags} ${styles.bookItems}`}>
-          <span className={styles.bookTagsLabel}>
-            <strong>tags: </strong>
-          </span>
           <span className={styles.bookTagsList}>
             {typeof tags === 'string'
               ? tags
@@ -64,6 +63,8 @@ export default function BookPage({ book }: BookPageProps) {
           </span>
         </p>
       </div>
+      <DescriptionBlock description={description} title="description" />
+      {notes && <DescriptionBlock description={notes} title="notes" />}
     </div>
   )
 }
